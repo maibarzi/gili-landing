@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gili.ai — WhatsApp-Buchungsassistent für Friseursalons</title>
+  <meta name="description" content="Kunden buchen direkt über WhatsApp — keine App, keine Plattform, keine Provision. Der smarte Buchungsassistent für Friseursalons und Beauty Studios in Wien.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@1&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            sage: {
+              DEFAULT: '#7d9e8c',
+              light: '#a8c4b8',
+              lighter: '#e8f0ec',
+              dark: '#5c7a6b',
+            }
+          },
+          fontFamily: {
+            sans: ['Instrument Sans', 'system-ui', 'sans-serif'],
+            serif: ['DM Serif Display', 'Georgia', 'serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Scroll reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.08s; }
+    .reveal-delay-2 { transition-delay: 0.16s; }
+    .reveal-delay-3 { transition-delay: 0.24s; }
+    .reveal-delay-4 { transition-delay: 0.32s; }
+    .reveal-delay-5 { transition-delay: 0.40s; }
+    .reveal-delay-6 { transition-delay: 0.48s; }
+
+    html { scroll-behavior: smooth; }
+
+    button:focus-visible, a:focus-visible {
+      outline: 2px solid #7d9e8c;
+      outline-offset: 3px;
+      border-radius: 8px;
+    }
+
+    /* ── Chat bubble animation ── */
+    @keyframes bubbleIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Hero chat: runs on page load */
+    .hero-bubble {
+      opacity: 0;
+      animation: bubbleIn 0.4s ease forwards;
+    }
+    .hero-b1 { animation-delay: 0.5s; }
+    .hero-b2 { animation-delay: 1.7s; }
+    .hero-b3 { animation-delay: 3.3s; }
+    .hero-b4 { animation-delay: 4.7s; }
+    .hero-b5 { animation-delay: 6.1s; }
+    .hero-b6 { animation-delay: 7.4s; }
+
+    /* Intelligence chat: triggered by IntersectionObserver */
+    .intel-bubble {
+      opacity: 0;
+    }
+    .intel-chat-active .intel-bubble {
+      animation: bubbleIn 0.4s ease forwards;
+    }
+    .intel-chat-active .intel-b1 { animation-delay: 0.2s; }
+    .intel-chat-active .intel-b2 { animation-delay: 1.3s; }
+  </style>
+</head>
+
+<body class="bg-white font-sans text-slate-700 antialiased">
+
+  <!-- ===================== NAV ===================== -->
+  <nav class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-sm border-b border-slate-100">
+    <div class="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
+      <span class="text-slate-900 font-semibold text-lg tracking-tight">gili.ai</span>
+      <a href="https://wa.me/4367764116572"
+         target="_blank" rel="noopener noreferrer"
+         class="flex items-center gap-2 bg-slate-900 text-white text-sm font-medium px-4 py-2 rounded-xl hover:bg-slate-800 transition-colors duration-200">
+        <i data-lucide="message-circle" class="w-4 h-4"></i>
+        TALK TO GILI
+      </a>
+    </div>
+  </nav>
+
+  <!-- ===================== HERO ===================== -->
+  <section class="pt-36 pb-24 px-6">
+    <div class="max-w-2xl mx-auto">
+      <h1 class="reveal font-serif italic leading-none mb-4 text-6xl sm:text-7xl lg:text-8xl text-slate-900">
+        Meet Gili.
+      </h1>
+      <div class="reveal mb-12 space-y-0.5">
+        <p class="font-serif italic text-xl sm:text-2xl text-slate-400">Sie machen Haare.</p>
+        <p class="font-serif italic text-xl sm:text-2xl text-slate-400">Termine buchen sich selbst — per WhatsApp.</p>
+        <p class="font-serif italic text-2xl sm:text-3xl text-sage font-semibold">0% Provision</p>
+      </div>
+
+      <!-- CTAs -->
+      <div class="reveal reveal-delay-1 flex flex-wrap gap-3">
+        <a href="https://wa.me/4367764116573"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="bg-sage text-white font-medium px-6 py-3 rounded-xl hover:bg-sage-dark transition-colors duration-200 text-sm text-center">
+          TEST IT
+        </a>
+        <a href="#wie-es-funktioniert"
+           class="bg-white text-slate-800 font-medium px-5 py-3 rounded-xl border border-slate-800 hover:bg-slate-50 transition-colors duration-200 text-sm text-center" style="border-width:1.5px">
+          Wie funktioniert das? ↓
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PAIN POINTS ===================== -->
+<section class="bg-slate-900 py-20 px-6">
+  <div class="max-w-5xl mx-auto">
+
+    <!-- Intro -->
+    <p class="reveal text-white text-lg font-semibold mb-2 text-center">84% Ihrer Kundinnen suchen zuerst auf Google.</p>
+    <p class="reveal text-slate-400 text-base mb-10 text-center">
+      So suchen Kundinnen heute nach einem Salon — und wo sie landen.
+    </p>
+
+    <!-- Google Search -->
+    <div class="reveal flex justify-center mb-5">
+      <div class="bg-white rounded-2xl px-5 pt-5 pb-4 w-full max-w-sm border border-slate-200 shadow-sm">
+        <div class="text-center mb-4">
+          <svg viewBox="0 0 272 92" width="72" class="inline-block" xmlns="http://www.w3.org/2000/svg">
+            <path d="M115.75 47.18c0 12.77-9.99 22.18-22.25 22.18s-22.25-9.41-22.25-22.18C71.25 34.32 81.24 25 93.5 25s22.25 9.32 22.25 22.18zm-9.74 0c0-7.98-5.79-13.44-12.51-13.44S80.99 39.2 80.99 47.18c0 7.9 5.79 13.44 12.51 13.44s12.51-5.55 12.51-13.44z" fill="#EA4335"/>
+            <path d="M163.75 47.18c0 12.77-9.99 22.18-22.25 22.18s-22.25-9.41-22.25-22.18c0-12.85 9.99-22.18 22.25-22.18s22.25 9.32 22.25 22.18zm-9.74 0c0-7.98-5.79-13.44-12.51-13.44s-12.51 5.46-12.51 13.44c0 7.9 5.79 13.44 12.51 13.44s12.51-5.55 12.51-13.44z" fill="#FBBC05"/>
+            <path d="M209.75 26.34v39.82c0 16.38-9.66 23.07-21.08 23.07-10.75 0-17.22-7.19-19.66-13.07l8.48-3.53c1.51 3.61 5.21 7.87 11.17 7.87 7.31 0 11.84-4.51 11.84-13v-3.19h-.34c-2.18 2.69-6.38 5.04-11.68 5.04-11.09 0-21.25-9.66-21.25-22.09 0-12.52 10.16-22.26 21.25-22.26 5.29 0 9.49 2.35 11.68 4.96h.34v-3.61h9.25zm-8.56 20.92c0-7.81-5.21-13.52-11.84-13.52-6.72 0-12.35 5.71-12.35 13.52 0 7.73 5.63 13.36 12.35 13.36 6.63 0 11.84-5.63 11.84-13.36z" fill="#4285F4"/>
+            <path d="M225 3v65h-9.5V3h9.5z" fill="#34A853"/>
+            <path d="M262.02 54.48l7.56 5.04c-2.44 3.61-8.32 9.83-18.48 9.83-12.6 0-22.01-9.74-22.01-22.18 0-13.19 9.49-22.18 20.92-22.18 11.51 0 17.14 9.16 18.98 14.11l1.01 2.52-29.65 12.28c2.27 4.45 5.8 6.72 10.75 6.72 4.96 0 8.4-2.44 10.92-6.14zm-23.27-7.98l19.82-8.23c-1.09-2.77-4.37-4.7-8.23-4.7-4.95 0-11.84 4.37-11.59 12.93z" fill="#EA4335"/>
+            <path d="M35.29 41.41V32H67c.31 1.64.47 3.58.47 5.68 0 7.06-1.93 15.79-8.15 22.01-6.05 6.3-13.78 9.66-24.02 9.66C16.32 69.35.36 53.89.36 34.91.36 15.93 16.32.47 35.3.47c10.5 0 17.98 4.12 23.6 9.49l-6.64 6.64c-4.03-3.78-9.49-6.72-16.97-6.72-13.86 0-24.7 11.17-24.7 25.03 0 13.86 10.84 25.03 24.7 25.03 8.99 0 14.11-3.61 17.39-6.89 2.66-2.66 4.41-6.46 5.1-11.65l-22.49.01z" fill="#4285F4"/>
+          </svg>
+        </div>
+        <div class="bg-gray-100 rounded-full px-4 py-2.5 flex items-center gap-2">
+          <svg class="w-4 h-4 text-gray-500 shrink-0" fill="none" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="M20 20l-3-3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          <span id="gili-search-text" class="text-gray-700 text-sm flex-1 min-h-[1.2em]"></span>
+          <svg class="w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24"><path d="M12 1a3.5 3.5 0 0 1 3.5 3.5v6a3.5 3.5 0 0 1-7 0v-6A3.5 3.5 0 0 1 12 1z" fill="#4285F4"/><path d="M19 11a7 7 0 0 1-14 0M12 18v4M8 22h8" stroke="#4285F4" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center text-slate-600 text-lg mb-3">↓</div>
+
+    <!-- Google Business Profile -->
+    <div class="reveal reveal-delay-1 flex justify-center mb-5">
+      <div class="bg-white rounded-2xl p-4 w-full max-w-sm border border-slate-200 shadow-sm">
+        <div class="flex items-center gap-3 mb-3">
+          <div class="w-11 h-11 rounded-xl bg-pink-100 flex items-center justify-center text-xl">🌸</div>
+          <div>
+            <p class="text-sm font-semibold text-gray-900">Lily Beauty Salon</p>
+            <div class="flex items-center gap-1 mt-0.5">
+              <span class="text-amber-400 text-xs">★★★★★</span>
+              <span class="text-xs text-gray-500">5,0 · 25 Rezensionen · Friseur</span>
+            </div>
+          </div>
+        </div>
+        <div class="flex gap-3 mb-3">
+          <div class="flex flex-col items-center gap-1">
+            <div class="w-9 h-9 rounded-full border-[1.5px] border-blue-400 flex items-center justify-center">
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="#4285f4"/><circle cx="12" cy="9" r="2.5" fill="white"/></svg>
+            </div>
+            <span class="text-[9px] text-blue-500 font-medium">Route</span>
+          </div>
+          <div class="flex flex-col items-center gap-1">
+            <div class="w-9 h-9 rounded-full border-[1.5px] border-blue-400 flex items-center justify-center">
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke="#4285f4" stroke-width="1.5"/><path d="M12 6v6l4 2" stroke="#4285f4" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </div>
+            <span class="text-[9px] text-blue-500 font-medium">Öffnungszeiten</span>
+          </div>
+          <div class="flex flex-col items-center gap-1">
+            <div class="w-9 h-9 rounded-full border-[1.5px] border-blue-400 flex items-center justify-center">
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke="#4285f4" stroke-width="1.5"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" stroke="#4285f4" stroke-width="1.5"/><path d="M2 12h20" stroke="#4285f4" stroke-width="1.5"/></svg>
+            </div>
+            <span class="text-[9px] text-blue-500 font-medium">Website</span>
+          </div>
+          <div class="flex flex-col items-center gap-1">
+            <div class="w-9 h-9 rounded-full border-[1.5px] border-blue-400 flex items-center justify-center">
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24"><path d="M4 12v8a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-8" stroke="#4285f4" stroke-width="1.5" stroke-linecap="round"/><polyline points="16 6 12 2 8 6" stroke="#4285f4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><line x1="12" y1="2" x2="12" y2="15" stroke="#4285f4" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </div>
+            <span class="text-[9px] text-blue-500 font-medium">Teilen</span>
+          </div>
+        </div>
+        <div class="bg-blue-600 rounded-xl py-2.5 flex items-center justify-center gap-2">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="17" rx="2" stroke="white" stroke-width="1.5"/><path d="M8 2v4M16 2v4M3 9h18" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <span class="text-white text-sm font-medium">Online buchen</span>
+          <svg class="w-3.5 h-3.5 shrink-0" fill="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4 2.5L4 21L9.5 15.5L13 22L15.5 20.5L12 14L19 14Z"/></svg>
+        </div>
+        <div class="mt-2.5 px-3 py-1.5 bg-gray-50 rounded-lg flex items-center gap-2">
+          <svg class="w-3 h-3 shrink-0" fill="none" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="#999"/><circle cx="12" cy="9" r="2.5" fill="white"/></svg>
+          <span class="text-xs text-gray-400">Grünangergasse 7, 1010 Wien · Offen bis 19:00</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center text-slate-600 text-lg mb-2">↓</div>
+    <p class="text-center text-slate-500 text-sm mb-8">
+      Der Kunde klickt auf <strong class="text-slate-300">„Online buchen"</strong> — was passiert als nächstes?
+    </p>
+
+    <!-- Two scenarios -->
+    <div class="reveal reveal-delay-2 grid sm:grid-cols-2 gap-5 mb-10">
+
+      <!-- OHNE GILI -->
+      <div class="rounded-2xl border border-slate-700 overflow-hidden bg-slate-800">
+        <div class="px-4 py-3 flex items-center justify-between" style="background:rgba(239,68,68,0.08);border-bottom:1px solid rgba(239,68,68,0.2);">
+          <span class="text-xs font-medium tracking-widest uppercase text-rose-400">Ohne Gili</span>
+          <span class="text-xs font-semibold px-3 py-1 rounded-full" style="background:rgba(239,68,68,0.12);color:#fca5a5;">−35% Provision</span>
+        </div>
+        <div class="p-4">
+          <!-- Booking platform mockup -->
+          <div class="bg-white rounded-xl overflow-hidden mb-4 border border-slate-200">
+            <div class="px-3 py-2.5 flex items-center gap-2" style="background:#6d28d9;">
+              <div class="w-6 h-6 rounded flex items-center justify-center" style="background:rgba(255,255,255,0.18);">
+                <svg class="w-3.5 h-3.5" fill="white" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M8 2v4M16 2v4M3 9h18" stroke="#6d28d9" stroke-width="1.5" stroke-linecap="round" fill="none"/></svg>
+              </div>
+              <span class="text-white text-xs font-medium">Online-Buchungsplattform</span>
+            </div>
+            <div style="height:112px;overflow:hidden;">
+              <img src="data:image/jpeg;base64,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" style="width:100%;height:112px;object-fit:cover;object-position:center 45%;display:block;" alt="Salon"/>
+            </div>
+            <div class="p-3">
+              <p class="text-xs font-semibold text-gray-900 mb-1">Lily Beauty Salon</p>
+              <div class="flex items-center gap-1 mb-2.5">
+                <span class="text-amber-400 text-[10px]">★★★★★</span>
+                <span class="text-[9px] text-gray-400">5,0 · 226 Bewertungen</span>
+              </div>
+              <div class="border-t border-gray-100 pt-2 space-y-2">
+                <p class="text-[9px] text-gray-400 uppercase tracking-wider font-medium">Beliebte Services</p>
+                <div class="flex justify-between items-center">
+                  <div><p class="text-[10px] font-medium text-gray-900">Ansatzblondierung &amp; Föhnen</p><p class="text-[9px] text-gray-400">2 Std. 15 Min.</p></div>
+                  <span class="text-[10px] font-semibold" style="color:#7c3aed;">ab 138€</span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <div><p class="text-[10px] font-medium text-gray-900">Waschen, Schneiden &amp; Föhnen</p><p class="text-[9px] text-gray-400">1 Std.</p></div>
+                  <span class="text-[10px] font-semibold" style="color:#7c3aed;">ab 70€</span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <div><p class="text-[10px] font-medium text-gray-900">Damenhaarschnitt trocken</p><p class="text-[9px] text-gray-400">45 Min.</p></div>
+                  <span class="text-[10px] font-semibold" style="color:#7c3aed;">ab 55€</span>
+                </div>
+              </div>
+              <div class="mt-2.5 rounded py-1.5 text-center" style="background:#6d28d9;">
+                <span class="text-[10px] text-white font-medium">Termin buchen</span>
+              </div>
+            </div>
+          </div>
+          <!-- Cons -->
+          <div class="space-y-1.5">
+            <div class="flex items-start gap-2 px-3 py-2 rounded-lg" style="background:rgba(239,68,68,0.08);">
+              <svg class="w-3.5 h-3.5 text-rose-400 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12" stroke="#f87171" stroke-width="2" stroke-linecap="round"/></svg>
+              <span class="text-xs text-rose-300 leading-snug">35% Provision bei jeder Buchung</span>
+            </div>
+            <div class="flex items-start gap-2 px-3 py-2 rounded-lg" style="background:rgba(239,68,68,0.08);">
+              <svg class="w-3.5 h-3.5 text-rose-400 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12" stroke="#f87171" stroke-width="2" stroke-linecap="round"/></svg>
+              <span class="text-xs text-rose-300 leading-snug">Kein direkter Kontakt mit dem Kunden</span>
+            </div>
+            <div class="flex items-start gap-2 px-3 py-2 rounded-lg" style="background:rgba(239,68,68,0.08);">
+              <svg class="w-3.5 h-3.5 text-rose-400 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12" stroke="#f87171" stroke-width="2" stroke-linecap="round"/></svg>
+              <span class="text-xs text-rose-300 leading-snug">Konkurrenz auf derselben Seite</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MIT GILI -->
+      <div class="rounded-2xl overflow-hidden bg-slate-800" style="border:1.5px solid rgba(139,175,139,0.65);box-shadow:0 0 24px rgba(139,175,139,0.12);">
+        <div class="px-4 py-3 flex items-center justify-between" style="background:rgba(139,175,139,0.13);border-bottom:1px solid rgba(139,175,139,0.25);">
+          <span class="text-xs font-semibold tracking-widest uppercase" style="color:#A8C5A8;">Mit Gili</span>
+          <span class="text-xs font-semibold px-3 py-1 rounded-full" style="background:rgba(139,175,139,0.2);color:#A8C5A8;">0% — alles gehört Ihnen</span>
+        </div>
+        <div class="p-4">
+          <!-- WhatsApp mockup -->
+          <div class="rounded-xl overflow-hidden mb-4" style="border:1px solid #334155;">
+            <div class="px-3 py-2.5 flex items-center gap-2" style="background:#128c7e;">
+              <div class="w-7 h-7 rounded-full bg-pink-100 flex items-center justify-center text-sm">🌸</div>
+              <div>
+                <p class="text-white text-xs font-semibold leading-none">Lily Beauty Salon</p>
+                <p class="text-[9px] mt-0.5" style="color:rgba(255,255,255,0.65);">Online · Antwortet sofort</p>
+              </div>
+            </div>
+            <div class="px-2.5 py-2.5 flex flex-col gap-1.5" style="background:#e5ddd5;">
+              <div class="flex justify-end">
+                <div class="rounded-lg rounded-tr-none px-2.5 py-1.5 shadow-sm" style="background:#dcf8c6;max-width:88%;">
+                  <p class="text-[10.5px] text-gray-800 leading-snug">Hallo, ich hätte gerne morgen um 14:00 einen Termin — Haarfärbung langes Haar.</p>
+                  <p class="text-[8px] text-right mt-1" style="color:#aaa;">17:32 ✓✓</p>
+                </div>
+              </div>
+              <div class="flex justify-start">
+                <div class="bg-white rounded-lg rounded-tl-none px-2.5 py-1.5 shadow-sm" style="max-width:90%;">
+                  <p class="text-[10.5px] text-gray-800 leading-snug">Herzlich willkommen! 🌸 Gerne — leider ist 14:00 vergeben. Ich kann Ihnen <strong>14:30</strong> anbieten. Passt das?</p>
+                  <p class="text-[8px] text-right mt-1" style="color:#aaa;">17:32</p>
+                </div>
+              </div>
+              <div class="flex justify-end">
+                <div class="rounded-lg rounded-tr-none px-2.5 py-1.5 shadow-sm" style="background:#dcf8c6;max-width:55%;">
+                  <p class="text-[10.5px] text-gray-800 leading-snug">Ja, perfekt!</p>
+                  <p class="text-[8px] text-right mt-1" style="color:#aaa;">17:33 ✓✓</p>
+                </div>
+              </div>
+              <div class="flex justify-start">
+                <div class="bg-white rounded-lg rounded-tl-none px-2.5 py-2 shadow-sm" style="max-width:92%;">
+                  <p class="text-[10.5px] text-gray-800" style="line-height:1.7;">Ihr Termin ist gebucht! 🎉<br>📅 Dienstag, 25. März<br>⏰ 14:30<br>✂️ Haarfärbung langes Haar<br>📍 Lily Beauty Salon, Grünangergasse 7<br>Bis dann! 💛</p>
+                  <p class="text-[8px] text-right mt-1" style="color:#aaa;">17:33</p>
+                </div>
+              </div>
+            </div>
+            <div class="bg-white px-2.5 py-1.5 flex items-center gap-2" style="border-top:1px solid #e5e7eb;">
+              <div class="flex-1 bg-gray-100 rounded-full px-3 py-1 text-[10px] text-gray-400">Nachricht …</div>
+              <div class="w-6 h-6 rounded-full flex items-center justify-center" style="background:#25d366;">
+                <svg class="w-3 h-3" fill="white" viewBox="0 0 24 24"><path d="M2 21l21-9L2 3v7l15 2-15 2v7z"/></svg>
+              </div>
+            </div>
+          </div>
+          <!-- Pros -->
+          <div class="space-y-1.5">
+            <div class="flex items-start gap-2 px-3 py-2 rounded-lg" style="background:rgba(139,175,139,0.1);">
+              <svg class="w-3.5 h-3.5 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" style="color:#8BAF8B;"><path d="M20 6 9 17l-5-5" stroke="#8BAF8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span class="text-xs text-slate-300 leading-snug">0% Provision — immer</span>
+            </div>
+            <div class="flex items-start gap-2 px-3 py-2 rounded-lg" style="background:rgba(139,175,139,0.1);">
+              <svg class="w-3.5 h-3.5 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5" stroke="#8BAF8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span class="text-xs text-slate-300 leading-snug">Jede Anfrage bekommt eine sofortige Antwort</span>
+            </div>
+            <div class="flex items-start gap-2 px-3 py-2 rounded-lg" style="background:rgba(139,175,139,0.1);">
+              <svg class="w-3.5 h-3.5 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5" stroke="#8BAF8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span class="text-xs text-slate-300 leading-snug">Buchungen um Mitternacht</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Bottom note -->
+    <p class="text-center text-slate-500 text-sm italic">
+      Mit Gili ersetzt der <strong class="text-slate-300 not-italic">„Online buchen"</strong>-Button die Plattform — und öffnet direkt Ihren WhatsApp-Chat.
+    </p>
+
+  </div>
+</section>
+
+<script>
+// Typing animation
+(function() {
+  var phrases = ["Friseur in der Nähe", "Friseur Wien", "Friseur 1010 Wien"];
+  var el = document.getElementById('gili-search-text');
+  if (!el) return;
+  var cursor = document.createElement('span');
+  cursor.textContent = '|';
+  cursor.style.cssText = 'color:#5f6368;animation:cursorBlink 0.8s step-end infinite';
+  el.appendChild(cursor);
+  var phraseIdx = 0, charIdx = 0, erasing = false;
+
+  function tick() {
+    var phrase = phrases[phraseIdx];
+    if (!erasing) {
+      if (charIdx < phrase.length) {
+        el.insertBefore(document.createTextNode(phrase[charIdx]), cursor);
+        charIdx++;
+        setTimeout(tick, 80 + Math.random() * 45);
+      } else {
+        erasing = true;
+        setTimeout(tick, 1600);
+      }
+    } else {
+      var nodes = [];
+      el.childNodes.forEach(function(n) { if (n !== cursor) nodes.push(n); });
+      if (nodes.length > 0) {
+        el.removeChild(nodes[nodes.length - 1]);
+        charIdx--;
+        setTimeout(tick, 45 + Math.random() * 25);
+      } else {
+        erasing = false;
+        charIdx = 0;
+        phraseIdx = (phraseIdx + 1) % phrases.length;
+        setTimeout(tick, 500);
+      }
+    }
+  }
+  setTimeout(tick, 900);
+})();
+
+// Scroll reveal
+(function() {
+  var els = document.querySelectorAll('.reveal');
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) { e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.1 });
+  els.forEach(function(el) { observer.observe(el); });
+})();
+</script>
+
+  <!-- ===================== HOW IT WORKS ===================== -->
+  <section id="wie-es-funktioniert" class="py-20 px-6 bg-white">
+    <div class="max-w-3xl mx-auto">
+      <div class="text-center mb-14 reveal">
+        <div class="inline-flex items-center gap-2 bg-sage-lighter text-sage-dark text-xs font-medium px-3 py-1.5 rounded-full mb-5">
+          <i data-lucide="zap" class="w-3 h-3"></i>
+          It's that simple
+        </div>
+        <h2 class="text-3xl sm:text-4xl font-semibold text-slate-900 mb-3">
+          Drei Schritte.<br>Kein Aufwand.
+        </h2>
+        <p class="text-slate-400 text-base max-w-sm mx-auto">
+          Kein neues System. Keine Schulung. Kein IT-Wissen.
+        </p>
+      </div>
+
+      <div class="grid sm:grid-cols-3 gap-8">
+        <div class="reveal reveal-delay-1 text-center">
+          <div class="relative w-14 h-14 rounded-2xl bg-sage-lighter flex items-center justify-center mx-auto mb-5">
+            <i data-lucide="message-circle" class="w-6 h-6 text-sage"></i>
+            <span class="absolute -top-2 -right-2 w-5 h-5 rounded-full bg-sage text-white text-xs font-semibold flex items-center justify-center">1</span>
+          </div>
+          <h3 class="font-semibold text-slate-900 mb-2">Kundin schreibt auf WhatsApp</h3>
+          <p class="text-slate-500 text-sm leading-relaxed">In ihrer eigenen Sprache. Zu jeder Uhrzeit.<br><span class="text-slate-400">Keine App. Kein Login.</span></p>
+        </div>
+
+        <div class="reveal reveal-delay-2 text-center">
+          <div class="relative w-14 h-14 rounded-2xl bg-sage-lighter flex items-center justify-center mx-auto mb-5">
+            <i data-lucide="calendar-check" class="w-6 h-6 text-sage"></i>
+            <span class="absolute -top-2 -right-2 w-5 h-5 rounded-full bg-sage text-white text-xs font-semibold flex items-center justify-center">2</span>
+          </div>
+          <h3 class="font-semibold text-slate-900 mb-2">Gili antwortet</h3>
+          <p class="text-slate-500 text-sm leading-relaxed">Gili antwortet so, wie Sie es würden — und erledigt alles selbst.<br><span class="text-slate-400">Sie müssen nichts tun.</span></p>
+        </div>
+
+        <div class="reveal reveal-delay-3 text-center">
+          <div class="relative w-14 h-14 rounded-2xl bg-sage-lighter flex items-center justify-center mx-auto mb-5">
+            <i data-lucide="check-circle" class="w-6 h-6 text-sage"></i>
+            <span class="absolute -top-2 -right-2 w-5 h-5 rounded-full bg-sage text-white text-xs font-semibold flex items-center justify-center">3</span>
+          </div>
+          <h3 class="font-semibold text-slate-900 mb-2">Kundin bestätigt</h3>
+          <p class="text-slate-500 text-sm leading-relaxed">Der neue Termin landet direkt in deinem Kalender.</p>
+        </div>
+      </div>
+
+      <div class="text-center mt-12 reveal">
+        <a href="https://wa.me/4367764116573"
+           target="_blank" rel="noopener noreferrer"
+           class="inline-block bg-sage text-white font-medium px-8 py-3 rounded-xl hover:bg-sage-dark transition-colors duration-200">
+          TEST IT
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== INTELLIGENCE ===================== -->
+  <section class="py-10 px-6 bg-stone-50">
+    <div class="max-w-4xl mx-auto">
+
+      <div class="text-center mb-6 reveal">
+        <div class="inline-block text-xs font-medium tracking-widest uppercase text-slate-400 mb-5">Nicht ein Bot</div>
+        <h2 class="font-serif italic text-3xl sm:text-4xl text-slate-900 mb-5 leading-snug">
+          Gebaut auf Psychologie &amp; Konversionsstrategie
+        </h2>
+        <p class="text-slate-500 text-lg max-w-xl mx-auto leading-relaxed">
+          Gilis Antworten sind mit Psychologie, Konsumentenverhalten und Verkaufsstrategie entwickelt — designed, um einen Kunden von "ich überlege" zu "gebucht" zu führen. Ohne Druck. In ihrer Sprache. In Sekunden.
+        </p>
+      </div>
+
+
+    </div>
+  </section>
+
+  <!-- ===================== FEATURES ===================== -->
+  <section class="py-20 px-6 bg-white">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-14 reveal">
+        <h2 class="text-3xl sm:text-4xl font-semibold text-slate-900 mb-4">
+          Was Gili kann.
+        </h2>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div class="reveal reveal-delay-1 bg-white rounded-2xl p-6 border border-slate-100 hover:border-sage-light hover:shadow-sm transition-all duration-200">
+          <div class="w-10 h-10 rounded-xl bg-sage-lighter flex items-center justify-center mb-4">
+            <i data-lucide="message-circle" class="w-5 h-5 text-sage"></i>
+          </div>
+          <h3 class="font-semibold text-slate-900 mb-1.5">Termine direkt per WhatsApp</h3>
+          <p class="text-slate-500 text-sm leading-relaxed">Kundinnen schreiben direkt an den Salon — zu jeder Uhrzeit. Gili schlägt freie Zeiten vor und bestätigt automatisch.</p>
+        </div>
+
+        <div class="reveal reveal-delay-2 bg-white rounded-2xl p-6 border border-slate-100 hover:border-sage-light hover:shadow-sm transition-all duration-200">
+          <div class="w-10 h-10 rounded-xl bg-sage-lighter flex items-center justify-center mb-4">
+            <i data-lucide="calendar" class="w-5 h-5 text-sage"></i>
+          </div>
+          <h3 class="font-semibold text-slate-900 mb-1.5">Synchronisiert Ihren Kalender</h3>
+          <p class="text-slate-500 text-sm leading-relaxed">Jeder Termin wird automatisch eingetragen — kompatibel mit Ihrem bestehenden Kalender und Buchungssystem.</p>
+        </div>
+
+        <div class="reveal reveal-delay-3 bg-white rounded-2xl p-6 border border-slate-100 hover:border-sage-light hover:shadow-sm transition-all duration-200">
+          <div class="w-10 h-10 rounded-xl bg-sage-lighter flex items-center justify-center mb-4">
+            <i data-lucide="bell" class="w-5 h-5 text-sage"></i>
+          </div>
+          <h3 class="font-semibold text-slate-900 mb-1.5">Sendet automatische Erinnerungen</h3>
+          <p class="text-slate-500 text-sm leading-relaxed">Per WhatsApp — wann immer Sie es möchten.</p>
+        </div>
+
+        <div class="reveal reveal-delay-4 bg-white rounded-2xl p-6 border border-slate-100 hover:border-sage-light hover:shadow-sm transition-all duration-200">
+          <div class="w-10 h-10 rounded-xl bg-sage-lighter flex items-center justify-center mb-4">
+            <i data-lucide="globe" class="w-5 h-5 text-sage"></i>
+          </div>
+          <h3 class="font-semibold text-slate-900 mb-1.5">Antwortet natürlich &amp; freundlich</h3>
+          <p class="text-slate-500 text-sm leading-relaxed">Antwortet so, wie Sie es würden — nur schneller.</p>
+        </div>
+
+        <div class="reveal reveal-delay-5 bg-white rounded-2xl p-6 border border-slate-100 hover:border-sage-light hover:shadow-sm transition-all duration-200">
+          <div class="w-10 h-10 rounded-xl bg-sage-lighter flex items-center justify-center mb-4">
+            <i data-lucide="credit-card" class="w-5 h-5 text-sage"></i>
+          </div>
+          <h3 class="font-semibold text-slate-900 mb-1.5">Zahlungen integrieren</h3>
+          <p class="text-slate-500 text-sm leading-relaxed">Stripe und andere Zahlungsanbieter lassen sich einfach verbinden — optional.</p>
+        </div>
+
+      </div>
+
+      <div class="text-center mt-12 reveal">
+        <a href="https://wa.me/4367764116573"
+           target="_blank" rel="noopener noreferrer"
+           class="inline-block bg-sage text-white font-medium px-8 py-3 rounded-xl hover:bg-sage-dark transition-colors duration-200">
+          TEST IT
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== TESTIMONIAL ===================== -->
+  <section class="py-20 px-6 bg-stone-50">
+    <div class="max-w-2xl mx-auto text-center reveal">
+      <div class="flex justify-center gap-1 mb-6">
+        <i data-lucide="star" class="w-5 h-5 text-amber-400 fill-amber-400"></i>
+        <i data-lucide="star" class="w-5 h-5 text-amber-400 fill-amber-400"></i>
+        <i data-lucide="star" class="w-5 h-5 text-amber-400 fill-amber-400"></i>
+        <i data-lucide="star" class="w-5 h-5 text-amber-400 fill-amber-400"></i>
+        <i data-lucide="star" class="w-5 h-5 text-amber-400 fill-amber-400"></i>
+      </div>
+
+      <blockquote class="text-slate-900 text-xl sm:text-2xl font-serif italic leading-relaxed mb-8">
+        "Ich weiß, dass WhatsApp für meine Kundinnen am einfachsten ist. Und ich zahle keine Provision mehr dafür. Das macht wirklich einen Unterschied."
+      </blockquote>
+
+      <div class="flex items-center justify-center gap-3">
+        <div class="w-10 h-10 rounded-full bg-sage-lighter flex items-center justify-center">
+          <span class="text-sage-dark font-semibold text-sm">YB</span>
+        </div>
+        <div class="text-left">
+          <div class="font-semibold text-slate-900 text-sm">Yellow Beauty Studio</div>
+          <div class="text-slate-400 text-xs">Wien, Austria</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEST IT before pricing -->
+  <div class="py-10 px-6 bg-white text-center reveal">
+    <a href="https://wa.me/4367764116573"
+       target="_blank" rel="noopener noreferrer"
+       class="inline-block bg-sage text-white font-medium px-8 py-3 rounded-xl hover:bg-sage-dark transition-colors duration-200">
+      TEST IT
+    </a>
+  </div>
+
+  <!-- ===================== PRICING ===================== -->
+  <section class="py-20 px-6 bg-white">
+    <div class="max-w-md mx-auto">
+      <div class="reveal reveal-delay-1 bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+        <div class="bg-sage px-7 py-6">
+          <div class="text-white text-2xl font-bold">Gili für Ihren Salon</div>
+        </div>
+
+        <div class="px-7 py-6 space-y-2">
+          <div class="flex flex-wrap items-center justify-between gap-y-2 py-4 border-b border-slate-100">
+            <div class="flex items-center gap-3">
+              <i data-lucide="settings" class="w-4 h-4 text-slate-400"></i>
+              <span class="text-sm text-slate-600">Einmalige Einrichtungsgebühr</span>
+            </div>
+            <span class="text-sm font-medium text-slate-900 bg-stone-100 px-3 py-1 rounded-lg">280 €</span>
+          </div>
+          <div class="flex flex-wrap items-center justify-between gap-y-2 py-4 border-b border-slate-100">
+            <div class="flex items-center gap-3">
+              <i data-lucide="repeat" class="w-4 h-4 text-slate-400"></i>
+              <span class="text-sm text-slate-600">Monatliche Pauschale</span>
+            </div>
+            <span class="text-sm font-medium text-slate-900 bg-stone-100 px-3 py-1 rounded-lg">97 €</span>
+          </div>
+          <div class="flex flex-wrap items-center justify-between gap-y-2 py-4 border-b border-slate-100">
+            <div class="flex items-center gap-3">
+              <i data-lucide="ban" class="w-4 h-4 text-sage"></i>
+              <span class="text-sm text-slate-600">Provision pro Buchung</span>
+            </div>
+            <span class="text-sm font-semibold text-sage bg-sage-lighter px-3 py-1 rounded-lg">0 %</span>
+          </div>
+          <div class="flex flex-wrap items-center justify-between gap-y-2 py-4">
+            <div class="flex items-center gap-3">
+              <i data-lucide="calendar-x" class="w-4 h-4 text-sage"></i>
+              <span class="text-sm text-slate-600">Vertragsbindung</span>
+            </div>
+            <span class="text-sm font-semibold text-sage bg-sage-lighter px-3 py-1 rounded-lg">Keine</span>
+          </div>
+        </div>
+
+        <div class="px-7 pb-7">
+          <a href="https://wa.me/4367764116572" target="_blank" rel="noopener noreferrer" class="block w-full bg-slate-900 text-white font-medium py-3 rounded-xl text-center hover:bg-slate-800 transition-colors duration-200 tracking-wide">
+            TALK TO GILI
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="border-t border-slate-100 py-8 px-6 bg-white">
+    <div class="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+      <span class="text-slate-900 font-semibold text-lg tracking-tight">gili.ai</span>
+      <nav class="flex items-center gap-5 text-sm text-slate-400">
+        <a href="#" class="hover:text-slate-600 transition-colors">Impressum</a>
+        <span class="text-slate-200">·</span>
+        <a href="#" class="hover:text-slate-600 transition-colors">Datenschutz</a>
+        <span class="text-slate-200">·</span>
+        <a href="mailto:hallo@gili.ai" class="hover:text-slate-600 transition-colors">hallo@gili.ai</a>
+      </nav>
+      <p class="text-slate-300 text-xs">© 2025 Gili.ai</p>
+    </div>
+  </footer>
+
+  <!-- ===================== SCRIPTS ===================== -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      lucide.createIcons();
+
+      // ── Scroll reveal ──
+      const revealEls = document.querySelectorAll('.reveal');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+      revealEls.forEach(el => observer.observe(el));
+
+      // ── Intelligence chat: trigger animation on scroll ──
+      const intelWrapper = document.getElementById('intel-chat-wrapper');
+      if (intelWrapper) {
+        const intelObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              intelWrapper.classList.add('intel-chat-active');
+              intelObserver.unobserve(intelWrapper);
+            }
+          });
+        }, { threshold: 0.35 });
+        intelObserver.observe(intelWrapper);
+      }
+    });
+  </script>
+
+</body>
+</html>

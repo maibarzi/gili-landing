@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gili.ai — WhatsApp-Buchungsassistent für Friseursalons</title>
+  <meta name="description" content="Kunden buchen direkt über WhatsApp — keine App, keine Plattform, keine Provision. Der smarte Buchungsassistent für Friseursalons und Beauty Studios in Wien.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@1&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            sage: {
+              DEFAULT: '#7d9e8c',
+              light: '#a8c4b8',
+              lighter: '#e8f0ec',
+              dark: '#5c7a6b',
+            }
+          },
+          fontFamily: {
+            sans: ['Instrument Sans', 'system-ui', 'sans-serif'],
+            serif: ['DM Serif Display', 'Georgia', 'serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Scroll reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.08s; }
+    .reveal-delay-2 { transition-delay: 0.16s; }
+    .reveal-delay-3 { transition-delay: 0.24s; }
+    .reveal-delay-4 { transition-delay: 0.32s; }
+    .reveal-delay-5 { transition-delay: 0.40s; }
+    .reveal-delay-6 { transition-delay: 0.48s; }
+
+    html { scroll-behavior: smooth; }
+
+    button:focus-visible, a:focus-visible {
+      outline: 2px solid #7d9e8c;
+      outline-offset: 3px;
+      border-radius: 8px;
+    }
+
+    /* ── Chat bubble animation ── */
+    @keyframes bubbleIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Hero chat: runs on page load */
+    .hero-bubble {
+      opacity: 0;
+      animation: bubbleIn 0.4s ease forwards;
+    }
+    .hero-b1 { animation-delay: 0.5s; }
+    .hero-b2 { animation-delay: 1.7s; }
+    .hero-b3 { animation-delay: 3.3s; }
+    .hero-b4 { animation-delay: 4.7s; }
+    .hero-b5 { animation-delay: 6.1s; }
+    .hero-b6 { animation-delay: 7.4s; }
+  </style>
+</head>
+
+<body class="bg-white font-sans text-slate-700 antialiased">
+
+  <!-- ===================== NAV ===================== -->
+  <nav class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-sm border-b border-slate-100">
+    <div class="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
+      <span class="text-slate-900 font-semibold text-lg tracking-tight">gili.ai</span>
+      <a href="https://wa.me/4367764116572"
+         target="_blank" rel="noopener noreferrer"
+         class="flex items-center gap-2 bg-slate-900 text-white text-sm font-medium px-4 py-2 rounded-xl hover:bg-slate-800 transition-colors duration-200">
+        <i data-lucide="message-circle" class="w-4 h-4"></i>
+        TALK TO GILI
+      </a>
+    </div>
+  </nav>
+
+  <!-- ===================== HERO ===================== -->
+  <section class="pt-36 pb-24 px-6">
+    <div class="max-w-2xl mx-auto">
+      <h1 class="reveal font-serif italic leading-tight mb-4 text-5xl sm:text-6xl lg:text-7xl text-slate-900">
+        Deine Kundenbeziehungen. <span style="color:#C4622D;">Automatisch</span> gepflegt.
+      </h1>
+      <div class="reveal mb-12">
+        <p class="text-lg sm:text-xl text-slate-500 leading-relaxed">Gili ist dein automatisches Kundenmanagementsystem — über WhatsApp.</p>
+      </div>
+
+      <!-- CTAs -->
+      <div class="reveal reveal-delay-1 flex flex-wrap gap-3">
+        <a href="https://wa.me/4367764116573"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="bg-sage text-white font-medium px-6 py-3 rounded-xl hover:bg-sage-dark transition-colors duration-200 text-sm text-center">
+          TEST IT
+        </a>
+        <a href="#wie-es-funktioniert"
+           class="bg-white text-slate-800 font-medium px-5 py-3 rounded-xl border border-slate-800 hover:bg-slate-50 transition-colors duration-200 text-sm text-center" style="border-width:1.5px">
+          Wie funktioniert das? ↓
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SO FUNKTIONIERT GILI ===================== -->
+  <section id="wie-es-funktioniert" class="py-20 px-6 bg-stone-50">
+    <div class="max-w-3xl mx-auto">
+      <div class="text-center mb-14 reveal">
+        <h2 class="text-3xl sm:text-4xl font-semibold text-slate-900 mb-3">
+          So funktioniert Gili
+        </h2>
+      </div>
+
+      <!-- Circular flow: 3 steps -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-0 sm:gap-0">
+
+        <!-- Step 1 -->
+        <div class="reveal reveal-delay-1 flex flex-col items-center text-center w-full sm:w-64 px-4">
+          <div class="w-16 h-16 rounded-full bg-white border-2 flex items-center justify-center mb-4 shadow-sm" style="border-color:#C4622D;">
+            <i data-lucide="message-circle" class="w-7 h-7" style="color:#C4622D;"></i>
+          </div>
+          <p class="font-semibold text-slate-900 text-sm mb-1">Kundin schreibt</p>
+          <p class="text-slate-500 text-xs leading-relaxed">Gili antwortet &amp; bucht</p>
+        </div>
+
+        <!-- Arrow 1 -->
+        <div class="flex sm:flex-row flex-col items-center">
+          <!-- mobile: down arrow -->
+          <svg class="block sm:hidden w-6 h-8 my-2" viewBox="0 0 24 32" fill="none"><path d="M12 0v28M5 21l7 7 7-7" stroke="#C4622D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <!-- desktop: right arrow -->
+          <svg class="hidden sm:block h-6 w-10" viewBox="0 0 40 24" fill="none"><path d="M0 12h36M28 5l8 7-8 7" stroke="#C4622D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="reveal reveal-delay-2 flex flex-col items-center text-center w-full sm:w-64 px-4">
+          <div class="w-16 h-16 rounded-full bg-white border-2 flex items-center justify-center mb-4 shadow-sm" style="border-color:#C4622D;">
+            <i data-lucide="calendar" class="w-7 h-7" style="color:#C4622D;"></i>
+          </div>
+          <p class="font-semibold text-slate-900 text-sm mb-1">Termin findet statt</p>
+          <p class="text-slate-500 text-xs leading-relaxed">&nbsp;</p>
+        </div>
+
+        <!-- Arrow 2 -->
+        <div class="flex sm:flex-row flex-col items-center">
+          <svg class="block sm:hidden w-6 h-8 my-2" viewBox="0 0 24 32" fill="none"><path d="M12 0v28M5 21l7 7 7-7" stroke="#C4622D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <svg class="hidden sm:block h-6 w-10" viewBox="0 0 40 24" fill="none"><path d="M0 12h36M28 5l8 7-8 7" stroke="#C4622D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="reveal reveal-delay-3 flex flex-col items-center text-center w-full sm:w-64 px-4">
+          <div class="w-16 h-16 rounded-full bg-white border-2 flex items-center justify-center mb-4 shadow-sm" style="border-color:#C4622D;">
+            <i data-lucide="rotate-ccw" class="w-7 h-7" style="color:#C4622D;"></i>
+          </div>
+          <p class="font-semibold text-slate-900 text-sm mb-1">Alle 5 Wochen</p>
+          <p class="text-slate-500 text-xs leading-relaxed">Gili lädt sie ein, wiederzukommen</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== WHATSAPP MOCKUP ===================== -->
+  <section class="py-20 px-6 bg-white">
+    <div class="max-w-sm mx-auto reveal">
+      <div class="rounded-xl overflow-hidden" style="border:1px solid #d1d5db;">
+        <!-- Chat header -->
+        <div class="px-3 py-2.5 flex items-center gap-2" style="background:#25D366;">
+          <div class="w-7 h-7 rounded-full bg-pink-100 flex items-center justify-center text-sm">🌸</div>
+          <div>
+            <p class="text-white text-xs font-semibold leading-none">Lily Beauty Salon</p>
+            <p class="text-[9px] mt-0.5" style="color:rgba(255,255,255,0.8);">Online · Antwortet sofort</p>
+          </div>
+        </div>
+        <!-- Chat body -->
+        <div class="px-2.5 py-2.5 flex flex-col gap-1.5" style="background:#e5ddd5;">
+          <!-- Existing bubbles -->
+          <div class="flex justify-end">
+            <div class="rounded-lg rounded-tr-none px-2.5 py-1.5 shadow-sm" style="background:#dcf8c6;max-width:88%;">
+              <p class="text-[10.5px] text-gray-800 leading-snug">Hallo, ich hätte gerne morgen um 14:00 einen Termin — Haarfärbung langes Haar.</p>
+              <p class="text-[8px] text-right mt-1" style="color:#aaa;">17:32 ✓✓</p>
+            </div>
+          </div>
+          <div class="flex justify-start">
+            <div class="bg-white rounded-lg rounded-tl-none px-2.5 py-1.5 shadow-sm" style="max-width:90%;">
+              <p class="text-[10.5px] text-gray-800 leading-snug">Herzlich willkommen! 🌸 Gerne — leider ist 14:00 vergeben. Ich kann Ihnen <strong>14:30</strong> anbieten. Passt das?</p>
+              <p class="text-[8px] text-right mt-1" style="color:#aaa;">17:32</p>
+            </div>
+          </div>
+          <div class="flex justify-end">
+            <div class="rounded-lg rounded-tr-none px-2.5 py-1.5 shadow-sm" style="background:#dcf8c6;max-width:55%;">
+              <p class="text-[10.5px] text-gray-800 leading-snug">Ja, perfekt!</p>
+              <p class="text-[8px] text-right mt-1" style="color:#aaa;">17:33 ✓✓</p>
+            </div>
+          </div>
+          <div class="flex justify-start">
+            <div class="bg-white rounded-lg rounded-tl-none px-2.5 py-2 shadow-sm" style="max-width:92%;">
+              <p class="text-[10.5px] text-gray-800" style="line-height:1.7;">Ihr Termin ist gebucht! 🎉<br>📅 Dienstag, 25. März<br>⏰ 14:30<br>✂️ Haarfärbung langes Haar<br>📍 Lily Beauty Salon, Grünangergasse 7<br>Bis dann! 💛</p>
+              <p class="text-[8px] text-right mt-1" style="color:#aaa;">17:33</p>
+            </div>
+          </div>
+
+          <!-- Separator: 5 Wochen später -->
+          <div class="flex justify-center my-2">
+            <span class="text-[9px] text-gray-500 bg-white/70 rounded-full px-3 py-1">🌷 5 Wochen später</span>
+          </div>
+
+          <!-- New bubbles -->
+          <div class="flex justify-start">
+            <div class="bg-white rounded-lg rounded-tl-none px-2.5 py-1.5 shadow-sm" style="max-width:92%;">
+              <p class="text-[10.5px] text-gray-800 leading-snug">Hallo Lilian! 😊 Wir haben dich vermisst! 💛 Möchtest du wieder einen Termin bei uns buchen?</p>
+              <p class="text-[8px] text-right mt-1" style="color:#aaa;">10:05</p>
+            </div>
+          </div>
+          <div class="flex justify-end">
+            <div class="rounded-lg rounded-tr-none px-2.5 py-1.5 shadow-sm" style="background:#dcf8c6;max-width:55%;">
+              <p class="text-[10.5px] text-gray-800 leading-snug">Ja gerne! 😊</p>
+              <p class="text-[8px] text-right mt-1" style="color:#aaa;">10:07 ✓✓</p>
+            </div>
+          </div>
+          <div class="flex justify-start">
+            <div class="bg-white rounded-lg rounded-tl-none px-2.5 py-1.5 shadow-sm" style="max-width:92%;">
+              <p class="text-[10.5px] text-gray-800 leading-snug">Wunderbar! ✨ Welche Tage passen dir nächste Woche am besten?</p>
+              <p class="text-[8px] text-right mt-1" style="color:#aaa;">10:07</p>
+            </div>
+          </div>
+        </div>
+        <!-- Chat input bar -->
+        <div class="bg-white px-2.5 py-1.5 flex items-center gap-2" style="border-top:1px solid #e5e7eb;">
+          <div class="flex-1 bg-gray-100 rounded-full px-3 py-1 text-[10px] text-gray-400">Nachricht …</div>
+          <div class="w-6 h-6 rounded-full flex items-center justify-center" style="background:#25d366;">
+            <svg class="w-3 h-3" fill="white" viewBox="0 0 24 24"><path d="M2 21l21-9L2 3v7l15 2-15 2v7z"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FEATURES ===================== -->
+  <section class="py-20 px-6 bg-white">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-14 reveal">
+        <h2 class="text-3xl sm:text-4xl font-semibold text-slate-900 mb-4">
+          Was Gili kann.
+        </h2>
+      </div>
+
+      <div class="grid sm:grid-cols-3 gap-5">
+        <div class="reveal reveal-delay-1 bg-white rounded-2xl p-6 border border-slate-100 hover:border-sage-light hover:shadow-sm transition-all duration-200">
+          <div class="w-10 h-10 rounded-xl bg-sage-lighter flex items-center justify-center mb-4">
+            <i data-lucide="message-circle" class="w-5 h-5 text-sage"></i>
+          </div>
+          <h3 class="font-semibold text-slate-900 mb-1.5">Antwortet Kunden &amp; bucht Termine – automatisch über WhatsApp</h3>
+        </div>
+
+        <div class="reveal reveal-delay-2 bg-white rounded-2xl p-6 border border-slate-100 hover:border-sage-light hover:shadow-sm transition-all duration-200">
+          <div class="w-10 h-10 rounded-xl bg-sage-lighter flex items-center justify-center mb-4">
+            <i data-lucide="rotate-ccw" class="w-5 h-5 text-sage"></i>
+          </div>
+          <h3 class="font-semibold text-slate-900 mb-1.5">Lädt Kundinnen ein – alle 5 Wochen, automatisch</h3>
+        </div>
+
+        <div class="reveal reveal-delay-3 bg-white rounded-2xl p-6 border border-slate-100 hover:border-sage-light hover:shadow-sm transition-all duration-200">
+          <div class="w-10 h-10 rounded-xl bg-sage-lighter flex items-center justify-center mb-4">
+            <i data-lucide="percent" class="w-5 h-5 text-sage"></i>
+          </div>
+          <h3 class="font-semibold text-slate-900 mb-1.5">Keine Provision</h3>
+        </div>
+      </div>
+
+      <div class="text-center mt-12 reveal">
+        <a href="https://wa.me/4367764116573"
+           target="_blank" rel="noopener noreferrer"
+           class="inline-block bg-sage text-white font-medium px-8 py-3 rounded-xl hover:bg-sage-dark transition-colors duration-200">
+          TEST IT
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== TESTIMONIAL ===================== -->
+  <section class="py-20 px-6 bg-stone-50">
+    <div class="max-w-2xl mx-auto text-center reveal">
+      <div class="flex justify-center gap-1 mb-6">
+        <i data-lucide="star" class="w-5 h-5 text-amber-400 fill-amber-400"></i>
+        <i data-lucide="star" class="w-5 h-5 text-amber-400 fill-amber-400"></i>
+        <i data-lucide="star" class="w-5 h-5 text-amber-400 fill-amber-400"></i>
+        <i data-lucide="star" class="w-5 h-5 text-amber-400 fill-amber-400"></i>
+        <i data-lucide="star" class="w-5 h-5 text-amber-400 fill-amber-400"></i>
+      </div>
+
+      <blockquote class="text-slate-900 text-xl sm:text-2xl font-serif italic leading-relaxed mb-8">
+        "Ich muss mir keine Sorgen mehr machen, ob meine Kundinnen wiederkommen — und ich zahle keine Provision dafür."
+      </blockquote>
+
+      <div class="flex items-center justify-center gap-3">
+        <div class="w-10 h-10 rounded-full bg-sage-lighter flex items-center justify-center">
+          <span class="text-sage-dark font-semibold text-sm">YB</span>
+        </div>
+        <div class="text-left">
+          <div class="font-semibold text-slate-900 text-sm">Parisa · Yellow Beauty Studio, Wien</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEST IT before pricing -->
+  <div class="py-10 px-6 bg-white text-center reveal">
+    <a href="https://wa.me/4367764116573"
+       target="_blank" rel="noopener noreferrer"
+       class="inline-block bg-sage text-white font-medium px-8 py-3 rounded-xl hover:bg-sage-dark transition-colors duration-200">
+      TEST IT
+    </a>
+  </div>
+
+  <!-- ===================== PRICING ===================== -->
+  <section class="py-20 px-6 bg-white">
+    <div class="max-w-md mx-auto">
+      <div class="reveal reveal-delay-1 bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+        <!-- Badge + header -->
+        <div class="px-7 py-6" style="background:#C4622D;">
+          <span class="inline-block text-white text-xs font-semibold tracking-wide uppercase px-3 py-1 rounded-full mb-3" style="background:rgba(255,255,255,0.2);">Sommerangebot</span>
+          <div class="flex items-baseline gap-3">
+            <span class="text-white text-4xl font-bold">€70</span>
+            <span class="text-white/60 text-xl line-through">€88</span>
+            <span class="text-white/80 text-base">/ Monat</span>
+          </div>
+        </div>
+
+        <div class="px-7 py-6 space-y-3">
+          <div class="flex items-center gap-2">
+            <i data-lucide="gift" class="w-4 h-4 text-sage shrink-0"></i>
+            <span class="text-sm text-slate-700 font-medium">Monat 1 gratis</span>
+          </div>
+          <div class="flex items-start gap-2">
+            <i data-lucide="users" class="w-4 h-4 text-slate-400 shrink-0 mt-0.5"></i>
+            <span class="text-sm text-slate-600">Ab 2 Stylisten: €67 pro Stylist · Ab 3 Stylisten: €55 pro Stylist</span>
+          </div>
+          <div class="pt-2 border-t border-slate-100">
+            <div class="flex items-start gap-2">
+              <i data-lucide="settings" class="w-4 h-4 text-slate-400 shrink-0 mt-0.5"></i>
+              <span class="text-xs text-slate-500">Einmalige Einrichtungsgebühr: €180 (Solo) / €240 (ab 2 Stylisten)</span>
+            </div>
+          </div>
+          <div class="flex items-center gap-2 pt-1">
+            <i data-lucide="ban" class="w-4 h-4 text-sage shrink-0"></i>
+            <span class="text-sm text-slate-600">0% Provision — immer</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <i data-lucide="calendar-x" class="w-4 h-4 text-sage shrink-0"></i>
+            <span class="text-sm text-slate-600">Keine Vertragsbindung</span>
+          </div>
+        </div>
+
+        <div class="px-7 pb-7">
+          <a href="https://wa.me/4367764116572" target="_blank" rel="noopener noreferrer" class="block w-full bg-slate-900 text-white font-medium py-3 rounded-xl text-center hover:bg-slate-800 transition-colors duration-200 tracking-wide">
+            TALK TO GILI
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="border-t border-slate-100 py-8 px-6 bg-white">
+    <div class="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+      <span class="text-slate-900 font-semibold text-lg tracking-tight">gili.ai</span>
+      <nav class="flex items-center gap-5 text-sm text-slate-400">
+        <a href="#" class="hover:text-slate-600 transition-colors">Impressum</a>
+        <span class="text-slate-200">·</span>
+        <a href="#" class="hover:text-slate-600 transition-colors">Datenschutz</a>
+        <span class="text-slate-200">·</span>
+        <a href="mailto:hallo@gili.ai" class="hover:text-slate-600 transition-colors">hallo@gili.ai</a>
+      </nav>
+      <p class="text-slate-300 text-xs">© 2025 Gili.ai</p>
+    </div>
+  </footer>
+
+  <!-- ===================== SCRIPTS ===================== -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      lucide.createIcons();
+
+      // ── Scroll reveal ──
+      const revealEls = document.querySelectorAll('.reveal');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+      revealEls.forEach(el => observer.observe(el));
+    });
+  </script>
+
+</body>
+</html>
