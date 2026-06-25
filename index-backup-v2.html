@@ -33,6 +33,7 @@
   </script>
 
   <style>
+    /* Scroll reveal */
     .reveal {
       opacity: 0;
       transform: translateY(28px);
@@ -46,6 +47,8 @@
     .reveal-delay-2 { transition-delay: 0.16s; }
     .reveal-delay-3 { transition-delay: 0.24s; }
     .reveal-delay-4 { transition-delay: 0.32s; }
+    .reveal-delay-5 { transition-delay: 0.40s; }
+    .reveal-delay-6 { transition-delay: 0.48s; }
 
     html { scroll-behavior: smooth; }
 
@@ -55,55 +58,23 @@
       border-radius: 8px;
     }
 
-    /* iPhone frame */
-    .iphone-frame {
-      position: relative;
-      background: #1a1a1a;
-      border-radius: 3rem;
-      padding: 12px;
-      box-shadow: 0 0 0 2px #3a3a3a, 0 0 0 4px #1a1a1a, 0 20px 60px rgba(0,0,0,0.35);
+    /* ── Chat bubble animation ── */
+    @keyframes bubbleIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
-    /* Side buttons */
-    .iphone-frame::before {
-      content: '';
-      position: absolute;
-      right: -3px;
-      top: 100px;
-      width: 3px;
-      height: 60px;
-      background: #2a2a2a;
-      border-radius: 0 2px 2px 0;
-      box-shadow: 0 80px 0 #2a2a2a;
+
+    /* Hero chat: runs on page load */
+    .hero-bubble {
+      opacity: 0;
+      animation: bubbleIn 0.4s ease forwards;
     }
-    .iphone-frame::after {
-      content: '';
-      position: absolute;
-      left: -3px;
-      top: 80px;
-      width: 3px;
-      height: 36px;
-      background: #2a2a2a;
-      border-radius: 2px 0 0 2px;
-      box-shadow: 0 48px 0 #2a2a2a, 0 96px 0 #2a2a2a;
-    }
-    .iphone-screen {
-      background: #e5ddd5;
-      border-radius: 2.4rem;
-      overflow: hidden;
-      position: relative;
-    }
-    /* Dynamic island */
-    .dynamic-island {
-      position: absolute;
-      top: 10px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 80px;
-      height: 26px;
-      background: #1a1a1a;
-      border-radius: 20px;
-      z-index: 10;
-    }
+    .hero-b1 { animation-delay: 0.5s; }
+    .hero-b2 { animation-delay: 1.7s; }
+    .hero-b3 { animation-delay: 3.3s; }
+    .hero-b4 { animation-delay: 4.7s; }
+    .hero-b5 { animation-delay: 6.1s; }
+    .hero-b6 { animation-delay: 7.4s; }
   </style>
 </head>
 
@@ -125,19 +96,18 @@
   <!-- ===================== HERO ===================== -->
   <section class="pt-36 pb-24 px-6">
     <div class="max-w-2xl mx-auto">
-      <h1 class="reveal font-serif italic leading-tight mb-4 text-4xl sm:text-5xl lg:text-6xl text-slate-900">
+      <h1 class="reveal font-serif italic leading-tight mb-4 text-5xl sm:text-6xl lg:text-7xl text-slate-900">
         Deine Kundenbeziehungen. <span style="color:#C4622D;">Automatisch</span> gepflegt.
       </h1>
-      <div class="reveal mb-12 space-y-2">
+      <div class="reveal mb-12">
         <p class="text-lg sm:text-xl text-slate-500 leading-relaxed">Gili ist dein automatisches Kundenmanagementsystem — über WhatsApp.</p>
-        <p class="text-sm text-slate-400">Für Friseursalons &amp; Beauty Studios in Wien.</p>
-        <p class="text-base font-medium" style="color:#C4622D;">Während du deine Kundin behandelst, bucht Gili die nächste.</p>
       </div>
 
       <!-- CTAs -->
       <div class="reveal reveal-delay-1 flex flex-wrap gap-3">
         <a href="https://wa.me/4367764116573"
-           target="_blank" rel="noopener noreferrer"
+           target="_blank"
+           rel="noopener noreferrer"
            class="bg-sage text-white font-medium px-6 py-3 rounded-xl hover:bg-sage-dark transition-colors duration-200 text-sm text-center">
           TEST IT
         </a>
@@ -149,175 +119,177 @@
     </div>
   </section>
 
-  <!-- ===================== PHONE MOCKUP ===================== -->
-  <section class="py-16 px-6 bg-stone-50">
-    <div class="max-w-xs mx-auto reveal">
-      <div class="iphone-frame">
-        <div class="iphone-screen">
-          <!-- Dynamic island -->
-          <div class="dynamic-island"></div>
-
-          <!-- Status bar spacer -->
-          <div style="height:48px;background:#25D366;"></div>
-
-          <!-- WhatsApp chat header -->
-          <div class="px-3 py-2.5 flex items-center gap-2" style="background:#25D366;">
-            <div class="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center text-base">🌸</div>
-            <div class="flex-1">
-              <p class="text-white text-xs font-semibold leading-none">Florence Beauty Salon</p>
-              <p class="text-[9px] mt-0.5 flex items-center gap-1" style="color:rgba(255,255,255,0.85);">
-                <span class="inline-block w-1.5 h-1.5 rounded-full bg-green-300"></span>
-                online
-              </p>
-            </div>
-          </div>
-
-          <!-- Chat body -->
-          <div class="px-2.5 py-3 flex flex-col gap-2" style="background:#e5ddd5;min-height:420px;">
-
-            <!-- Client -->
-            <div class="flex justify-end">
-              <div class="rounded-lg rounded-tr-none px-2.5 py-1.5 shadow-sm" style="background:#dcf8c6;max-width:88%;">
-                <p class="text-[10.5px] text-gray-800 leading-snug">Cool! 15:00 Uhr wäre super, noch lieber wäre mir 15:30 😊</p>
-                <p class="text-[8px] text-right mt-1" style="color:#aaa;">14:22 ✓✓</p>
-              </div>
-            </div>
-
-            <!-- Gili booking confirmation -->
-            <div class="flex justify-start">
-              <div class="bg-white rounded-lg rounded-tl-none px-2.5 py-2 shadow-sm" style="max-width:93%;">
-                <p class="text-[10.5px] text-gray-800" style="line-height:1.7;">Perfekt, Lilian! ✨ 15:30 Uhr am Montag passt gut, ich habe den Termin für dich eingetragen. ❤️<br>📅 Montag, 21. Dezember 2026<br>⏰ 15:30 Uhr<br>✂️ Waschen, Schneiden &amp; Föhnen (lang)<br>📍 Florence Beauty Studio, Giligasse 8, 1010 Wien<br>Wir freuen uns auf dich! 🌸</p>
-                <p class="text-[8px] text-right mt-1" style="color:#aaa;">14:22</p>
-              </div>
-            </div>
-
-            <!-- Separator -->
-            <div class="flex justify-center my-1">
-              <span class="text-[8.5px] text-gray-500 bg-white/70 rounded-full px-3 py-1 text-center">🌷 5 Wochen später — 2. Februar 2027</span>
-            </div>
-
-            <!-- Gili re-engagement -->
-            <div class="flex justify-start">
-              <div class="bg-white rounded-lg rounded-tl-none px-2.5 py-1.5 shadow-sm" style="max-width:92%;">
-                <p class="text-[10.5px] text-gray-800 leading-snug">Hallo Lilian! 😊 Wir haben dich vermisst! 💛 Möchtest du wieder einen Termin bei uns buchen?</p>
-                <p class="text-[8px] text-right mt-1" style="color:#aaa;">10:05</p>
-              </div>
-            </div>
-
-            <!-- Client -->
-            <div class="flex justify-end">
-              <div class="rounded-lg rounded-tr-none px-2.5 py-1.5 shadow-sm" style="background:#dcf8c6;max-width:55%;">
-                <p class="text-[10.5px] text-gray-800 leading-snug">Ja gerne! 😊</p>
-                <p class="text-[8px] text-right mt-1" style="color:#aaa;">10:07 ✓✓</p>
-              </div>
-            </div>
-
-            <!-- Gili -->
-            <div class="flex justify-start">
-              <div class="bg-white rounded-lg rounded-tl-none px-2.5 py-1.5 shadow-sm" style="max-width:92%;">
-                <p class="text-[10.5px] text-gray-800 leading-snug">Wunderbar! ✨ Welche Tage passen dir nächste Woche am besten?</p>
-                <p class="text-[8px] text-right mt-1" style="color:#aaa;">10:07</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Input bar -->
-          <div class="bg-white px-2.5 py-1.5 flex items-center gap-2" style="border-top:1px solid #e5e7eb;">
-            <div class="flex-1 bg-gray-100 rounded-full px-3 py-1 text-[10px] text-gray-400">Nachricht …</div>
-            <div class="w-6 h-6 rounded-full flex items-center justify-center" style="background:#25d366;">
-              <svg class="w-3 h-3" fill="white" viewBox="0 0 24 24"><path d="M2 21l21-9L2 3v7l15 2-15 2v7z"/></svg>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- ===================== SO FUNKTIONIERT GILI ===================== -->
-  <section id="wie-es-funktioniert" class="py-20 px-6 bg-white">
-    <div class="max-w-2xl mx-auto">
-      <div class="text-center mb-16 reveal">
-        <h2 class="text-3xl sm:text-4xl font-semibold text-slate-900">So funktioniert Gili</h2>
+  <section id="wie-es-funktioniert" class="py-20 px-6 bg-stone-50">
+    <div class="max-w-3xl mx-auto">
+      <div class="text-center mb-14 reveal">
+        <h2 class="text-3xl sm:text-4xl font-semibold text-slate-900 mb-3">
+          So funktioniert Gili
+        </h2>
       </div>
 
-      <!-- Triangle layout -->
-      <div class="reveal relative" style="height:340px;">
+      <!-- Circular flow: 3 steps -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-0 sm:gap-0">
 
-        <!-- Step 1 — top center -->
-        <div class="absolute flex flex-col items-center text-center" style="top:0;left:50%;transform:translateX(-50%);">
-          <div class="w-16 h-16 rounded-full bg-white border-2 flex items-center justify-center mb-3 shadow-sm" style="border-color:#C4622D;">
+        <!-- Step 1 -->
+        <div class="reveal reveal-delay-1 flex flex-col items-center text-center w-full sm:w-64 px-4">
+          <div class="w-16 h-16 rounded-full bg-white border-2 flex items-center justify-center mb-4 shadow-sm" style="border-color:#C4622D;">
             <i data-lucide="message-circle" class="w-7 h-7" style="color:#C4622D;"></i>
           </div>
-          <p class="font-semibold text-slate-900 text-sm">Kundin schreibt</p>
-          <p class="text-slate-500 text-xs mt-0.5">Gili antwortet &amp; bucht</p>
+          <p class="font-semibold text-slate-900 text-sm mb-1">Kundin schreibt</p>
+          <p class="text-slate-500 text-xs leading-relaxed">Gili antwortet &amp; bucht</p>
         </div>
 
-        <!-- Step 2 — bottom right -->
-        <div class="absolute flex flex-col items-center text-center" style="bottom:0;right:0;">
-          <div class="w-16 h-16 rounded-full bg-white border-2 flex items-center justify-center mb-3 shadow-sm" style="border-color:#C4622D;">
+        <!-- Arrow 1 -->
+        <div class="flex sm:flex-row flex-col items-center">
+          <!-- mobile: down arrow -->
+          <svg class="block sm:hidden w-6 h-8 my-2" viewBox="0 0 24 32" fill="none"><path d="M12 0v28M5 21l7 7 7-7" stroke="#C4622D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <!-- desktop: right arrow -->
+          <svg class="hidden sm:block h-6 w-10" viewBox="0 0 40 24" fill="none"><path d="M0 12h36M28 5l8 7-8 7" stroke="#C4622D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="reveal reveal-delay-2 flex flex-col items-center text-center w-full sm:w-64 px-4">
+          <div class="w-16 h-16 rounded-full bg-white border-2 flex items-center justify-center mb-4 shadow-sm" style="border-color:#C4622D;">
             <i data-lucide="calendar" class="w-7 h-7" style="color:#C4622D;"></i>
           </div>
-          <p class="font-semibold text-slate-900 text-sm">Termin findet statt</p>
+          <p class="font-semibold text-slate-900 text-sm mb-1">Termin findet statt</p>
+          <p class="text-slate-500 text-xs leading-relaxed">&nbsp;</p>
         </div>
 
-        <!-- Step 3 — bottom left -->
-        <div class="absolute flex flex-col items-center text-center" style="bottom:0;left:0;">
-          <div class="w-16 h-16 rounded-full bg-white border-2 flex items-center justify-center mb-3 shadow-sm" style="border-color:#C4622D;">
+        <!-- Arrow 2 -->
+        <div class="flex sm:flex-row flex-col items-center">
+          <svg class="block sm:hidden w-6 h-8 my-2" viewBox="0 0 24 32" fill="none"><path d="M12 0v28M5 21l7 7 7-7" stroke="#C4622D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <svg class="hidden sm:block h-6 w-10" viewBox="0 0 40 24" fill="none"><path d="M0 12h36M28 5l8 7-8 7" stroke="#C4622D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="reveal reveal-delay-3 flex flex-col items-center text-center w-full sm:w-64 px-4">
+          <div class="w-16 h-16 rounded-full bg-white border-2 flex items-center justify-center mb-4 shadow-sm" style="border-color:#C4622D;">
             <i data-lucide="rotate-ccw" class="w-7 h-7" style="color:#C4622D;"></i>
           </div>
-          <p class="font-semibold text-slate-900 text-sm">Alle 5 Wochen</p>
-          <p class="text-slate-500 text-xs mt-0.5">Gili lädt sie ein,<br>wiederzukommen</p>
+          <p class="font-semibold text-slate-900 text-sm mb-1">Alle 5 Wochen</p>
+          <p class="text-slate-500 text-xs leading-relaxed">Gili lädt sie ein, wiederzukommen</p>
         </div>
 
-        <!-- SVG curved arrows -->
-        <svg class="absolute inset-0 w-full h-full" viewBox="0 0 400 340" fill="none" xmlns="http://www.w3.org/2000/svg" style="pointer-events:none;">
-          <!-- Arrow 1: top-center to bottom-right (clockwise) -->
-          <path d="M 240 80 Q 330 120 295 240" stroke="#C4622D" stroke-width="2" stroke-dasharray="6 3" fill="none" marker-end="url(#arrow)"/>
-          <!-- Arrow 2: bottom-right to bottom-left -->
-          <path d="M 265 285 Q 200 315 135 285" stroke="#C4622D" stroke-width="2" stroke-dasharray="6 3" fill="none" marker-end="url(#arrow)"/>
-          <!-- Arrow 3: bottom-left to top-center (closing loop) -->
-          <path d="M 105 240 Q 70 120 160 80" stroke="#C4622D" stroke-width="2" stroke-dasharray="6 3" fill="none" marker-end="url(#arrow)"/>
-          <defs>
-            <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-              <path d="M0,0 L0,6 L8,3 z" fill="#C4622D"/>
-            </marker>
-          </defs>
-        </svg>
       </div>
     </div>
   </section>
 
-  <!-- ===================== ALLES IN EINER HAND ===================== -->
-  <section class="py-20 px-6 bg-stone-50">
+  <!-- ===================== WHATSAPP MOCKUP ===================== -->
+  <section class="py-20 px-6 bg-white">
+    <div class="max-w-sm mx-auto reveal">
+      <div class="rounded-xl overflow-hidden" style="border:1px solid #d1d5db;">
+        <!-- Chat header -->
+        <div class="px-3 py-2.5 flex items-center gap-2" style="background:#25D366;">
+          <div class="w-7 h-7 rounded-full bg-pink-100 flex items-center justify-center text-sm">🌸</div>
+          <div>
+            <p class="text-white text-xs font-semibold leading-none">Lily Beauty Salon</p>
+            <p class="text-[9px] mt-0.5" style="color:rgba(255,255,255,0.8);">Online · Antwortet sofort</p>
+          </div>
+        </div>
+        <!-- Chat body -->
+        <div class="px-2.5 py-2.5 flex flex-col gap-1.5" style="background:#e5ddd5;">
+          <!-- Existing bubbles -->
+          <div class="flex justify-end">
+            <div class="rounded-lg rounded-tr-none px-2.5 py-1.5 shadow-sm" style="background:#dcf8c6;max-width:88%;">
+              <p class="text-[10.5px] text-gray-800 leading-snug">Hallo, ich hätte gerne morgen um 14:00 einen Termin — Haarfärbung langes Haar.</p>
+              <p class="text-[8px] text-right mt-1" style="color:#aaa;">17:32 ✓✓</p>
+            </div>
+          </div>
+          <div class="flex justify-start">
+            <div class="bg-white rounded-lg rounded-tl-none px-2.5 py-1.5 shadow-sm" style="max-width:90%;">
+              <p class="text-[10.5px] text-gray-800 leading-snug">Herzlich willkommen! 🌸 Gerne — leider ist 14:00 vergeben. Ich kann Ihnen <strong>14:30</strong> anbieten. Passt das?</p>
+              <p class="text-[8px] text-right mt-1" style="color:#aaa;">17:32</p>
+            </div>
+          </div>
+          <div class="flex justify-end">
+            <div class="rounded-lg rounded-tr-none px-2.5 py-1.5 shadow-sm" style="background:#dcf8c6;max-width:55%;">
+              <p class="text-[10.5px] text-gray-800 leading-snug">Ja, perfekt!</p>
+              <p class="text-[8px] text-right mt-1" style="color:#aaa;">17:33 ✓✓</p>
+            </div>
+          </div>
+          <div class="flex justify-start">
+            <div class="bg-white rounded-lg rounded-tl-none px-2.5 py-2 shadow-sm" style="max-width:92%;">
+              <p class="text-[10.5px] text-gray-800" style="line-height:1.7;">Ihr Termin ist gebucht! 🎉<br>📅 Dienstag, 25. März<br>⏰ 14:30<br>✂️ Haarfärbung langes Haar<br>📍 Lily Beauty Salon, Grünangergasse 7<br>Bis dann! 💛</p>
+              <p class="text-[8px] text-right mt-1" style="color:#aaa;">17:33</p>
+            </div>
+          </div>
+
+          <!-- Separator: 5 Wochen später -->
+          <div class="flex justify-center my-2">
+            <span class="text-[9px] text-gray-500 bg-white/70 rounded-full px-3 py-1">🌷 5 Wochen später</span>
+          </div>
+
+          <!-- New bubbles -->
+          <div class="flex justify-start">
+            <div class="bg-white rounded-lg rounded-tl-none px-2.5 py-1.5 shadow-sm" style="max-width:92%;">
+              <p class="text-[10.5px] text-gray-800 leading-snug">Hallo Lilian! 😊 Wir haben dich vermisst! 💛 Möchtest du wieder einen Termin bei uns buchen?</p>
+              <p class="text-[8px] text-right mt-1" style="color:#aaa;">10:05</p>
+            </div>
+          </div>
+          <div class="flex justify-end">
+            <div class="rounded-lg rounded-tr-none px-2.5 py-1.5 shadow-sm" style="background:#dcf8c6;max-width:55%;">
+              <p class="text-[10.5px] text-gray-800 leading-snug">Ja gerne! 😊</p>
+              <p class="text-[8px] text-right mt-1" style="color:#aaa;">10:07 ✓✓</p>
+            </div>
+          </div>
+          <div class="flex justify-start">
+            <div class="bg-white rounded-lg rounded-tl-none px-2.5 py-1.5 shadow-sm" style="max-width:92%;">
+              <p class="text-[10.5px] text-gray-800 leading-snug">Wunderbar! ✨ Welche Tage passen dir nächste Woche am besten?</p>
+              <p class="text-[8px] text-right mt-1" style="color:#aaa;">10:07</p>
+            </div>
+          </div>
+        </div>
+        <!-- Chat input bar -->
+        <div class="bg-white px-2.5 py-1.5 flex items-center gap-2" style="border-top:1px solid #e5e7eb;">
+          <div class="flex-1 bg-gray-100 rounded-full px-3 py-1 text-[10px] text-gray-400">Nachricht …</div>
+          <div class="w-6 h-6 rounded-full flex items-center justify-center" style="background:#25d366;">
+            <svg class="w-3 h-3" fill="white" viewBox="0 0 24 24"><path d="M2 21l21-9L2 3v7l15 2-15 2v7z"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FEATURES ===================== -->
+  <section class="py-20 px-6 bg-white">
     <div class="max-w-5xl mx-auto">
       <div class="text-center mb-14 reveal">
-        <h2 class="text-3xl sm:text-4xl font-semibold text-slate-900 mb-4">Alles in einer Hand</h2>
+        <h2 class="text-3xl sm:text-4xl font-semibold text-slate-900 mb-4">
+          Was Gili kann.
+        </h2>
       </div>
 
       <div class="grid sm:grid-cols-3 gap-5">
         <div class="reveal reveal-delay-1 bg-white rounded-2xl p-6 border border-slate-100 hover:border-sage-light hover:shadow-sm transition-all duration-200">
           <div class="w-10 h-10 rounded-xl bg-sage-lighter flex items-center justify-center mb-4">
-            <i data-lucide="layout-dashboard" class="w-5 h-5 text-sage"></i>
+            <i data-lucide="message-circle" class="w-5 h-5 text-sage"></i>
           </div>
-          <h3 class="font-semibold text-slate-900 mb-1.5">Übersichtliches Dashboard</h3>
-          <p class="text-slate-500 text-sm leading-relaxed">Alle Termine, Kundendaten und Aktivitäten auf einen Blick.</p>
+          <h3 class="font-semibold text-slate-900 mb-1.5">Antwortet Kunden &amp; bucht Termine – automatisch über WhatsApp</h3>
         </div>
 
         <div class="reveal reveal-delay-2 bg-white rounded-2xl p-6 border border-slate-100 hover:border-sage-light hover:shadow-sm transition-all duration-200">
           <div class="w-10 h-10 rounded-xl bg-sage-lighter flex items-center justify-center mb-4">
-            <i data-lucide="share-2" class="w-5 h-5 text-sage"></i>
+            <i data-lucide="rotate-ccw" class="w-5 h-5 text-sage"></i>
           </div>
-          <h3 class="font-semibold text-slate-900 mb-1.5">Verknüpft mit deinen Kanälen</h3>
-          <p class="text-slate-500 text-sm leading-relaxed">Verbinde deine Social-Media-Kanäle und halte alles synchron.</p>
+          <h3 class="font-semibold text-slate-900 mb-1.5">Lädt Kundinnen ein – alle 5 Wochen, automatisch</h3>
         </div>
 
         <div class="reveal reveal-delay-3 bg-white rounded-2xl p-6 border border-slate-100 hover:border-sage-light hover:shadow-sm transition-all duration-200">
           <div class="w-10 h-10 rounded-xl bg-sage-lighter flex items-center justify-center mb-4">
-            <i data-lucide="megaphone" class="w-5 h-5 text-sage"></i>
+            <i data-lucide="percent" class="w-5 h-5 text-sage"></i>
           </div>
-          <h3 class="font-semibold text-slate-900 mb-1.5">Urlaub, Aktionen &amp; mehr</h3>
-          <p class="text-slate-500 text-sm leading-relaxed">Teile Sonderangebote, Urlaubszeiten und Updates direkt über Gili.</p>
+          <h3 class="font-semibold text-slate-900 mb-1.5">Keine Provision</h3>
         </div>
+      </div>
+
+      <div class="text-center mt-12 reveal">
+        <a href="https://wa.me/4367764116573"
+           target="_blank" rel="noopener noreferrer"
+           class="inline-block bg-sage text-white font-medium px-8 py-3 rounded-xl hover:bg-sage-dark transition-colors duration-200">
+          TEST IT
+        </a>
       </div>
     </div>
   </section>
@@ -427,6 +399,7 @@
     document.addEventListener('DOMContentLoaded', () => {
       lucide.createIcons();
 
+      // ── Scroll reveal ──
       const revealEls = document.querySelectorAll('.reveal');
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
