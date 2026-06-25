@@ -58,51 +58,49 @@
     /* iPhone frame */
     .iphone-frame {
       position: relative;
-      background: #1A1A18;
-      border-radius: 40px;
-      border: 6px solid #1A1A18;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.15);
-      max-width: 280px;
-      margin: 0 auto;
+      background: #1c1c1e;
+      border-radius: 2.5rem;
+      padding: 4px;
+      box-shadow: 0 0 0 1px #3a3a3c, 0 24px 48px rgba(0,0,0,0.28), 0 4px 12px rgba(0,0,0,0.15);
     }
     /* Right: power button */
     .iphone-frame::before {
       content: '';
       position: absolute;
-      right: -9px;
-      top: 110px;
+      right: -3px;
+      top: 120px;
       width: 3px;
-      height: 44px;
-      background: #444;
+      height: 52px;
+      background: #3a3a3c;
       border-radius: 0 2px 2px 0;
     }
     /* Left: two volume buttons */
     .iphone-frame::after {
       content: '';
       position: absolute;
-      left: -9px;
-      top: 88px;
+      left: -3px;
+      top: 96px;
       width: 3px;
-      height: 30px;
-      background: #444;
+      height: 36px;
+      background: #3a3a3c;
       border-radius: 2px 0 0 2px;
-      box-shadow: 0 44px 0 #444;
+      box-shadow: 0 52px 0 #3a3a3c;
     }
     .iphone-screen {
       background: #e5ddd5;
-      border-radius: 34px;
+      border-radius: 2.35rem;
       overflow: hidden;
       position: relative;
     }
     /* Dynamic island */
     .dynamic-island {
       position: absolute;
-      top: 10px;
+      top: 12px;
       left: 50%;
       transform: translateX(-50%);
       width: 90px;
       height: 28px;
-      background: #1A1A18;
+      background: #1c1c1e;
       border-radius: 20px;
       z-index: 10;
     }
@@ -114,7 +112,7 @@
   <!-- ===================== NAV ===================== -->
   <nav class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-sm border-b border-slate-100">
     <div class="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
-      <span style="font-family: 'DM Serif Display', serif; font-size: 1.8rem; font-weight: 400; color: #1A1A18; letter-spacing: -0.02em;">gili<span style="color: #C4622D;">.</span></span>
+      <span class="text-slate-900 font-semibold text-lg tracking-tight">gili.ai</span>
       <a href="https://wa.me/4367764116572"
          target="_blank" rel="noopener noreferrer"
          class="flex items-center gap-2 bg-slate-900 text-white text-sm font-medium px-4 py-2 rounded-xl hover:bg-slate-800 transition-colors duration-200">
@@ -130,17 +128,8 @@
       <h1 class="reveal font-serif italic leading-tight mb-4 text-4xl sm:text-5xl lg:text-6xl text-slate-900">
         Deine Kundenbeziehungen. <span style="color:#C4622D;">Automatisch</span> gepflegt.
       </h1>
-      <div class="reveal mb-12 space-y-4">
-        <p class="text-lg sm:text-xl text-slate-500 leading-relaxed">Gili spricht mit deinen Kundinnen auf WhatsApp — im Namen deines Salons.</p>
-        <!-- Gili chat bubble -->
-        <div class="inline-block">
-          <p class="text-xs font-semibold mb-1 ml-1" style="color:#C4622D;">gili.</p>
-          <div class="relative rounded-2xl rounded-bl-none px-4 py-3 shadow-sm inline-block" style="background:#F0F0F0;max-width:360px;">
-            <p class="text-sm leading-relaxed" style="color:#C4622D;">Und sorgt dafür, dass sie wiederkommen.</p>
-            <!-- Tail -->
-            <span style="position:absolute;bottom:-8px;left:0;width:0;height:0;border-style:solid;border-width:8px 8px 0 0;border-color:#F0F0F0 transparent transparent transparent;"></span>
-          </div>
-        </div>
+      <div class="reveal mb-12 space-y-2">
+        <p class="text-lg sm:text-xl text-slate-500 leading-relaxed">Gili spricht mit deinen Kundinnen auf WhatsApp — im Namen deines Salons. Und sorgt dafür, dass sie wiederkommen.</p>
       </div>
 
       <!-- CTAs -->
@@ -177,22 +166,22 @@
           </div>
 
           <!-- WhatsApp chat header -->
-          <div class="flex items-center gap-2 px-2" style="background:#075E54;height:56px;">
+          <div class="flex items-center gap-2 px-2 py-2" style="background:#1F2C34;">
             <!-- Back arrow -->
-            <svg width="10" height="16" viewBox="0 0 10 16" fill="none" class="shrink-0"><path d="M8.5 1L1.5 8L8.5 15" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <svg width="10" height="16" viewBox="0 0 10 16" fill="none"><path d="M8.5 1L1.5 8L8.5 15" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             <!-- Avatar -->
-            <div class="w-8 h-8 rounded-full flex items-center justify-center text-[13px] font-bold text-white shrink-0" style="background:#9E9E9E;">F</div>
+            <div class="w-8 h-8 rounded-full flex items-center justify-center text-[10px] font-bold text-white shrink-0" style="background:#7d9e8c;">FB</div>
             <!-- Name + status -->
             <div class="flex-1 min-w-0">
-              <p class="text-white font-bold leading-none truncate" style="font-size:14px;">Florence Beauty Salon</p>
-              <p class="flex items-center gap-1 mt-0.5" style="font-size:11px;color:#a8d5a2;">
+              <p class="text-white text-[11px] font-semibold leading-none truncate">Florence Beauty Salon</p>
+              <p class="text-[9px] mt-0.5 flex items-center gap-1" style="color:#25D366;">
                 <span class="inline-block w-1.5 h-1.5 rounded-full" style="background:#25D366;"></span>Online
               </p>
             </div>
             <!-- Icons -->
             <div class="flex items-center gap-3 shrink-0">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 5.45 5.45l.97-.97a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21 16.92z"/></svg>
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 5.45 5.45l.97-.97a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21 16.92z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
             </div>
           </div>
 
@@ -264,8 +253,53 @@
         <h2 class="text-3xl sm:text-4xl font-semibold text-slate-900">So funktioniert Gili</h2>
       </div>
 
-      <div class="reveal">
-        <img src="diagram.png" alt="So funktioniert Gili" style="max-width:500px;width:100%;display:block;margin:0 auto;">
+      <!-- Triangle layout — 500×460 viewBox, steps pinned by % -->
+      <div class="reveal relative w-full" style="height:460px;max-width:520px;margin:0 auto;">
+
+        <!-- SVG arrows underneath steps -->
+        <svg class="absolute inset-0 w-full h-full" viewBox="0 0 520 460" fill="none" xmlns="http://www.w3.org/2000/svg" style="pointer-events:none;">
+          <defs>
+            <marker id="arr" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+              <path d="M0,1 L8,4.5 L0,8 Z" fill="#C4622D"/>
+            </marker>
+          </defs>
+          <!-- Arrow 1: Step 1 (top-center ~260,90) → Step 2 (bottom-right ~420,330) -->
+          <path d="M 295 115 C 370 160, 400 240, 400 300"
+                stroke="#C4622D" stroke-width="2" stroke-dasharray="7 4" fill="none" marker-end="url(#arr)"/>
+          <!-- Arrow 2: Step 2 (bottom-right ~420,330) → Step 3 (bottom-left ~100,330) -->
+          <path d="M 388 358 C 340 400, 180 400, 132 358"
+                stroke="#C4622D" stroke-width="2" stroke-dasharray="7 4" fill="none" marker-end="url(#arr)"/>
+          <!-- Arrow 3: Step 3 (bottom-left ~100,330) → Step 1 (top-center ~260,90) -->
+          <path d="M 120 300 C 118 220, 170 140, 228 115"
+                stroke="#C4622D" stroke-width="2" stroke-dasharray="7 4" fill="none" marker-end="url(#arr)"/>
+        </svg>
+
+        <!-- Step 1 — top center -->
+        <div class="absolute flex flex-col items-center text-center" style="top:0;left:50%;transform:translateX(-50%);width:140px;">
+          <div class="w-16 h-16 rounded-full bg-white border-2 flex items-center justify-center mb-3 shadow-sm" style="border-color:#C4622D;">
+            <i data-lucide="message-circle" class="w-7 h-7" style="color:#C4622D;"></i>
+          </div>
+          <p class="font-semibold text-slate-900 text-sm leading-snug">Kundin schreibt</p>
+          <p class="text-slate-500 text-xs mt-1 leading-snug">Gili antwortet &amp; bucht</p>
+        </div>
+
+        <!-- Step 2 — bottom right -->
+        <div class="absolute flex flex-col items-center text-center" style="bottom:20px;right:0;width:140px;">
+          <div class="w-16 h-16 rounded-full bg-white border-2 flex items-center justify-center mb-3 shadow-sm" style="border-color:#C4622D;">
+            <i data-lucide="calendar" class="w-7 h-7" style="color:#C4622D;"></i>
+          </div>
+          <p class="font-semibold text-slate-900 text-sm leading-snug">Termin findet statt</p>
+        </div>
+
+        <!-- Step 3 — bottom left -->
+        <div class="absolute flex flex-col items-center text-center" style="bottom:20px;left:0;width:140px;">
+          <div class="w-16 h-16 rounded-full bg-white border-2 flex items-center justify-center mb-3 shadow-sm" style="border-color:#C4622D;">
+            <i data-lucide="rotate-ccw" class="w-7 h-7" style="color:#C4622D;"></i>
+          </div>
+          <p class="font-semibold text-slate-900 text-sm leading-snug">Alle 5 Wochen</p>
+          <p class="text-slate-500 text-xs mt-1 leading-snug">Gili lädt sie ein,<br>wiederzukommen</p>
+        </div>
+
       </div>
     </div>
   </section>
@@ -298,8 +332,8 @@
           <div class="w-10 h-10 rounded-xl bg-sage-lighter flex items-center justify-center mb-4">
             <i data-lucide="megaphone" class="w-5 h-5 text-sage"></i>
           </div>
-          <h3 class="font-semibold text-slate-900 mb-1.5">Urlaub, Aktionen &amp; Angebote</h3>
-          <p class="text-slate-500 text-sm leading-relaxed">Teile Sonderangebote, Urlaubszeiten und Updates direkt über Gili — wann immer du möchtest.</p>
+          <h3 class="font-semibold text-slate-900 mb-1.5">Urlaub, Aktionen &amp; mehr</h3>
+          <p class="text-slate-500 text-sm leading-relaxed">Teile Sonderangebote, Urlaubszeiten und Updates direkt über Gili.</p>
         </div>
       </div>
     </div>
