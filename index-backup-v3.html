@@ -58,49 +58,49 @@
     /* iPhone frame */
     .iphone-frame {
       position: relative;
-      background: #1c1c1e;
-      border-radius: 2.5rem;
-      padding: 4px;
-      box-shadow: 0 0 0 1px #3a3a3c, 0 24px 48px rgba(0,0,0,0.28), 0 4px 12px rgba(0,0,0,0.15);
+      background: #1a1a1a;
+      border-radius: 3rem;
+      padding: 12px;
+      box-shadow: 0 0 0 2px #3a3a3a, 0 0 0 4px #1a1a1a, 0 20px 60px rgba(0,0,0,0.35);
     }
-    /* Right: power button */
+    /* Side buttons */
     .iphone-frame::before {
       content: '';
       position: absolute;
       right: -3px;
-      top: 120px;
+      top: 100px;
       width: 3px;
-      height: 52px;
-      background: #3a3a3c;
+      height: 60px;
+      background: #2a2a2a;
       border-radius: 0 2px 2px 0;
+      box-shadow: 0 80px 0 #2a2a2a;
     }
-    /* Left: two volume buttons */
     .iphone-frame::after {
       content: '';
       position: absolute;
       left: -3px;
-      top: 96px;
+      top: 80px;
       width: 3px;
       height: 36px;
-      background: #3a3a3c;
+      background: #2a2a2a;
       border-radius: 2px 0 0 2px;
-      box-shadow: 0 52px 0 #3a3a3c;
+      box-shadow: 0 48px 0 #2a2a2a, 0 96px 0 #2a2a2a;
     }
     .iphone-screen {
       background: #e5ddd5;
-      border-radius: 2.35rem;
+      border-radius: 2.4rem;
       overflow: hidden;
       position: relative;
     }
     /* Dynamic island */
     .dynamic-island {
       position: absolute;
-      top: 12px;
+      top: 10px;
       left: 50%;
       transform: translateX(-50%);
-      width: 90px;
-      height: 28px;
-      background: #1c1c1e;
+      width: 80px;
+      height: 26px;
+      background: #1a1a1a;
       border-radius: 20px;
       z-index: 10;
     }
@@ -129,7 +129,9 @@
         Deine Kundenbeziehungen. <span style="color:#C4622D;">Automatisch</span> gepflegt.
       </h1>
       <div class="reveal mb-12 space-y-2">
-        <p class="text-lg sm:text-xl text-slate-500 leading-relaxed">Gili spricht mit deinen Kundinnen auf WhatsApp — im Namen deines Salons. Und sorgt dafür, dass sie wiederkommen.</p>
+        <p class="text-lg sm:text-xl text-slate-500 leading-relaxed">Gili ist dein automatisches Kundenmanagementsystem — über WhatsApp.</p>
+        <p class="text-sm text-slate-400">Für Friseursalons &amp; Beauty Studios in Wien.</p>
+        <p class="text-base font-medium" style="color:#C4622D;">Während du deine Kundin behandelst, bucht Gili die nächste.</p>
       </div>
 
       <!-- CTAs -->
@@ -155,33 +157,18 @@
           <!-- Dynamic island -->
           <div class="dynamic-island"></div>
 
-          <!-- Status bar -->
-          <div class="flex items-center justify-between px-4" style="height:44px;background:#1F2C34;">
-            <span class="text-white text-[9px] font-medium">9:41</span>
-            <div class="flex items-center gap-1">
-              <svg width="12" height="9" viewBox="0 0 12 9" fill="white" opacity="0.9"><rect x="0" y="5" width="2" height="4" rx="0.5"/><rect x="3" y="3" width="2" height="6" rx="0.5"/><rect x="6" y="1" width="2" height="8" rx="0.5"/><rect x="9" y="0" width="2" height="9" rx="0.5"/></svg>
-              <svg width="10" height="9" viewBox="0 0 10 9" fill="white" opacity="0.9"><path d="M5 1.5C6.8 1.5 8.4 2.3 9.5 3.5L10 3C8.7 1.5 6.95 0.5 5 0.5C3.05 0.5 1.3 1.5 0 3L0.5 3.5C1.6 2.3 3.2 1.5 5 1.5Z"/><path d="M5 3.5C6.2 3.5 7.3 4 8.1 4.8L8.6 4.3C7.6 3.3 6.4 2.7 5 2.7C3.6 2.7 2.4 3.3 1.4 4.3L1.9 4.8C2.7 4 3.8 3.5 5 3.5Z"/><circle cx="5" cy="7" r="1.2"/></svg>
-              <svg width="22" height="10" viewBox="0 0 22 10" fill="none"><rect x="0.5" y="0.5" width="18" height="9" rx="2" stroke="white" stroke-opacity="0.35"/><rect x="1.5" y="1.5" width="14" height="7" rx="1.5" fill="white"/><path d="M20 3.5V6.5C20.8 6.2 21.5 5.7 21.5 5C21.5 4.3 20.8 3.8 20 3.5Z" fill="white" opacity="0.4"/></svg>
-            </div>
-          </div>
+          <!-- Status bar spacer -->
+          <div style="height:48px;background:#25D366;"></div>
 
           <!-- WhatsApp chat header -->
-          <div class="flex items-center gap-2 px-2 py-2" style="background:#1F2C34;">
-            <!-- Back arrow -->
-            <svg width="10" height="16" viewBox="0 0 10 16" fill="none"><path d="M8.5 1L1.5 8L8.5 15" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <!-- Avatar -->
-            <div class="w-8 h-8 rounded-full flex items-center justify-center text-[10px] font-bold text-white shrink-0" style="background:#7d9e8c;">FB</div>
-            <!-- Name + status -->
-            <div class="flex-1 min-w-0">
-              <p class="text-white text-[11px] font-semibold leading-none truncate">Florence Beauty Salon</p>
-              <p class="text-[9px] mt-0.5 flex items-center gap-1" style="color:#25D366;">
-                <span class="inline-block w-1.5 h-1.5 rounded-full" style="background:#25D366;"></span>Online
+          <div class="px-3 py-2.5 flex items-center gap-2" style="background:#25D366;">
+            <div class="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center text-base">🌸</div>
+            <div class="flex-1">
+              <p class="text-white text-xs font-semibold leading-none">Florence Beauty Salon</p>
+              <p class="text-[9px] mt-0.5 flex items-center gap-1" style="color:rgba(255,255,255,0.85);">
+                <span class="inline-block w-1.5 h-1.5 rounded-full bg-green-300"></span>
+                online
               </p>
-            </div>
-            <!-- Icons -->
-            <div class="flex items-center gap-3 shrink-0">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 5.45 5.45l.97-.97a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21 16.92z"/></svg>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
             </div>
           </div>
 
@@ -253,53 +240,49 @@
         <h2 class="text-3xl sm:text-4xl font-semibold text-slate-900">So funktioniert Gili</h2>
       </div>
 
-      <!-- Triangle layout — 500×460 viewBox, steps pinned by % -->
-      <div class="reveal relative w-full" style="height:460px;max-width:520px;margin:0 auto;">
-
-        <!-- SVG arrows underneath steps -->
-        <svg class="absolute inset-0 w-full h-full" viewBox="0 0 520 460" fill="none" xmlns="http://www.w3.org/2000/svg" style="pointer-events:none;">
-          <defs>
-            <marker id="arr" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
-              <path d="M0,1 L8,4.5 L0,8 Z" fill="#C4622D"/>
-            </marker>
-          </defs>
-          <!-- Arrow 1: Step 1 (top-center ~260,90) → Step 2 (bottom-right ~420,330) -->
-          <path d="M 295 115 C 370 160, 400 240, 400 300"
-                stroke="#C4622D" stroke-width="2" stroke-dasharray="7 4" fill="none" marker-end="url(#arr)"/>
-          <!-- Arrow 2: Step 2 (bottom-right ~420,330) → Step 3 (bottom-left ~100,330) -->
-          <path d="M 388 358 C 340 400, 180 400, 132 358"
-                stroke="#C4622D" stroke-width="2" stroke-dasharray="7 4" fill="none" marker-end="url(#arr)"/>
-          <!-- Arrow 3: Step 3 (bottom-left ~100,330) → Step 1 (top-center ~260,90) -->
-          <path d="M 120 300 C 118 220, 170 140, 228 115"
-                stroke="#C4622D" stroke-width="2" stroke-dasharray="7 4" fill="none" marker-end="url(#arr)"/>
-        </svg>
+      <!-- Triangle layout -->
+      <div class="reveal relative" style="height:340px;">
 
         <!-- Step 1 — top center -->
-        <div class="absolute flex flex-col items-center text-center" style="top:0;left:50%;transform:translateX(-50%);width:140px;">
+        <div class="absolute flex flex-col items-center text-center" style="top:0;left:50%;transform:translateX(-50%);">
           <div class="w-16 h-16 rounded-full bg-white border-2 flex items-center justify-center mb-3 shadow-sm" style="border-color:#C4622D;">
             <i data-lucide="message-circle" class="w-7 h-7" style="color:#C4622D;"></i>
           </div>
-          <p class="font-semibold text-slate-900 text-sm leading-snug">Kundin schreibt</p>
-          <p class="text-slate-500 text-xs mt-1 leading-snug">Gili antwortet &amp; bucht</p>
+          <p class="font-semibold text-slate-900 text-sm">Kundin schreibt</p>
+          <p class="text-slate-500 text-xs mt-0.5">Gili antwortet &amp; bucht</p>
         </div>
 
         <!-- Step 2 — bottom right -->
-        <div class="absolute flex flex-col items-center text-center" style="bottom:20px;right:0;width:140px;">
+        <div class="absolute flex flex-col items-center text-center" style="bottom:0;right:0;">
           <div class="w-16 h-16 rounded-full bg-white border-2 flex items-center justify-center mb-3 shadow-sm" style="border-color:#C4622D;">
             <i data-lucide="calendar" class="w-7 h-7" style="color:#C4622D;"></i>
           </div>
-          <p class="font-semibold text-slate-900 text-sm leading-snug">Termin findet statt</p>
+          <p class="font-semibold text-slate-900 text-sm">Termin findet statt</p>
         </div>
 
         <!-- Step 3 — bottom left -->
-        <div class="absolute flex flex-col items-center text-center" style="bottom:20px;left:0;width:140px;">
+        <div class="absolute flex flex-col items-center text-center" style="bottom:0;left:0;">
           <div class="w-16 h-16 rounded-full bg-white border-2 flex items-center justify-center mb-3 shadow-sm" style="border-color:#C4622D;">
             <i data-lucide="rotate-ccw" class="w-7 h-7" style="color:#C4622D;"></i>
           </div>
-          <p class="font-semibold text-slate-900 text-sm leading-snug">Alle 5 Wochen</p>
-          <p class="text-slate-500 text-xs mt-1 leading-snug">Gili lädt sie ein,<br>wiederzukommen</p>
+          <p class="font-semibold text-slate-900 text-sm">Alle 5 Wochen</p>
+          <p class="text-slate-500 text-xs mt-0.5">Gili lädt sie ein,<br>wiederzukommen</p>
         </div>
 
+        <!-- SVG curved arrows -->
+        <svg class="absolute inset-0 w-full h-full" viewBox="0 0 400 340" fill="none" xmlns="http://www.w3.org/2000/svg" style="pointer-events:none;">
+          <!-- Arrow 1: top-center to bottom-right (clockwise) -->
+          <path d="M 240 80 Q 330 120 295 240" stroke="#C4622D" stroke-width="2" stroke-dasharray="6 3" fill="none" marker-end="url(#arrow)"/>
+          <!-- Arrow 2: bottom-right to bottom-left -->
+          <path d="M 265 285 Q 200 315 135 285" stroke="#C4622D" stroke-width="2" stroke-dasharray="6 3" fill="none" marker-end="url(#arrow)"/>
+          <!-- Arrow 3: bottom-left to top-center (closing loop) -->
+          <path d="M 105 240 Q 70 120 160 80" stroke="#C4622D" stroke-width="2" stroke-dasharray="6 3" fill="none" marker-end="url(#arrow)"/>
+          <defs>
+            <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+              <path d="M0,0 L0,6 L8,3 z" fill="#C4622D"/>
+            </marker>
+          </defs>
+        </svg>
       </div>
     </div>
   </section>
