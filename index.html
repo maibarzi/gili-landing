@@ -230,9 +230,105 @@
   </section>
 
   <!-- ===================== PHONE MOCKUP ===================== -->
-  <section class="py-6 sm:py-8 px-6 bg-stone-50">
-    <div class="reveal">
-      <img src="mockupv.png" alt="Gili WhatsApp" style="max-width: 340px; width: 100%; display: block; margin: 0 auto; background: #fff;">
+  <section class="py-8 sm:py-10 px-6 bg-stone-50">
+    <div class="reveal flex flex-col items-center gap-3 md:flex-row md:justify-center md:items-center md:gap-0" style="position:relative;">
+
+      <!-- Mobile annotation: above phone -->
+      <div class="flex items-center gap-3 md:hidden">
+        <div style="background:#FBEEF0; color:#C4847A; border-radius:999px; padding:6px 16px; font-size:13px; font-weight:600; font-family:'Instrument Sans',sans-serif; white-space:nowrap; letter-spacing:0.01em;">
+          Sie kommt zurück — ganz von selbst.
+        </div>
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" style="flex-shrink:0;">
+          <path d="M11 4 L11 16" stroke="#E8A0A8" stroke-width="1.8" stroke-linecap="round"/>
+          <path d="M7 12 L11 16 L15 12" stroke="#E8A0A8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        </svg>
+      </div>
+
+      <!-- iPhone frame -->
+      <div class="iphone-frame" style="width:260px; max-width:260px; flex-shrink:0;">
+        <div class="iphone-screen" style="height:537px;">
+          <!-- Dynamic Island -->
+          <div class="dynamic-island"></div>
+          <!-- WhatsApp Header -->
+          <div style="margin-top:48px; background:#075E54; padding:9px 14px; display:flex; align-items:center; gap:10px; height:56px; box-sizing:border-box;">
+            <div style="width:34px; height:34px; border-radius:50%; background:#a8c4b8; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+              <span style="font-size:12px; color:#fff; font-weight:600; font-family:'Instrument Sans',sans-serif;">YB</span>
+            </div>
+            <div>
+              <div style="color:#fff; font-size:12px; font-weight:600; font-family:'Instrument Sans',sans-serif; line-height:1.3;">Yellow Beauty Studio</div>
+              <div style="color:rgba(255,255,255,0.65); font-size:10px; font-family:'Instrument Sans',sans-serif;">Online</div>
+            </div>
+          </div>
+          <!-- Chat body: overflow hidden, content bottom-aligned -->
+          <div style="background:#ECE5DD; height:433px; overflow:hidden; display:flex; flex-direction:column; justify-content:flex-end; padding:6px 9px 10px 9px; box-sizing:border-box;">
+
+            <!-- Booking confirmation (incoming, tail end) -->
+            <div style="background:#fff; border-radius:8px 8px 8px 2px; padding:7px 10px 5px; max-width:88%; margin-bottom:3px; font-size:11.5px; font-family:'Instrument Sans',sans-serif; line-height:1.45; color:#111;">
+              <div style="font-size:10.5px; color:#C4622D; font-weight:600; margin-bottom:3px; font-family:'Instrument Sans',sans-serif;">Yellow Beauty Studio</div>
+              Perfekt, Leila! ✨<br>
+              📅 Dienstag, 14. Jan<br>
+              ⏰ 10:00 Uhr<br>
+              ✂️ Schnitt &amp; Styling<br>
+              📍 Linzer Str. 10, Wien<br>
+              Wir freuen uns auf dich! 🌸
+              <div style="display:flex; justify-content:flex-end; align-items:center; gap:3px; margin-top:3px;">
+                <span style="font-size:9px; color:#999;">10:32</span>
+                <svg width="13" height="8" viewBox="0 0 13 8" fill="none"><path d="M1 4L3.5 6.5L8.5 1.5" stroke="#4FC3F7" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/><path d="M4.5 4L7 6.5L12 1.5" stroke="#4FC3F7" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+            </div>
+
+            <!-- Client reply -->
+            <div style="background:#DCF8C6; border-radius:8px 8px 2px 8px; padding:7px 10px 5px; max-width:60%; align-self:flex-end; margin-bottom:10px; font-size:11.5px; font-family:'Instrument Sans',sans-serif; color:#111;">
+              Danke 😊
+              <div style="display:flex; justify-content:flex-end; align-items:center; gap:3px; margin-top:3px;">
+                <span style="font-size:9px; color:#999;">10:33</span>
+                <svg width="13" height="8" viewBox="0 0 13 8" fill="none"><path d="M1 4L3.5 6.5L8.5 1.5" stroke="#4FC3F7" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/><path d="M4.5 4L7 6.5L12 1.5" stroke="#4FC3F7" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+            </div>
+
+            <!-- 5 Wochen separator -->
+            <div style="display:flex; align-items:center; gap:6px; margin:0 2px 10px; flex-shrink:0;">
+              <div style="flex:1; height:1px; background:rgba(0,0,0,0.18);"></div>
+              <span style="font-size:10px; color:#6b6b6b; font-family:'Instrument Sans',sans-serif; white-space:nowrap; letter-spacing:0.01em;">5 Wochen später · 2. Feb</span>
+              <div style="flex:1; height:1px; background:rgba(0,0,0,0.18);"></div>
+            </div>
+
+            <!-- Re-engagement message (terracotta left border) -->
+            <div style="background:#fff; border-radius:8px 8px 8px 2px; padding:7px 10px 5px; max-width:88%; margin-bottom:3px; font-size:11.5px; font-family:'Instrument Sans',sans-serif; line-height:1.45; color:#111; border-left:3px solid #C4622D;">
+              <div style="font-size:10.5px; color:#C4622D; font-weight:600; margin-bottom:3px; font-family:'Instrument Sans',sans-serif;">Yellow Beauty Studio</div>
+              Hallo Leila 🌸 Wir vermissen dich — darf ich dir einen Termin vorschlagen?
+              <div style="display:flex; justify-content:flex-end; align-items:center; gap:3px; margin-top:3px;">
+                <span style="font-size:9px; color:#999;">9:15</span>
+                <svg width="13" height="8" viewBox="0 0 13 8" fill="none"><path d="M1 4L3.5 6.5L8.5 1.5" stroke="#4FC3F7" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/><path d="M4.5 4L7 6.5L12 1.5" stroke="#4FC3F7" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+            </div>
+
+            <!-- Client response -->
+            <div style="background:#DCF8C6; border-radius:8px 8px 2px 8px; padding:7px 10px 5px; max-width:60%; align-self:flex-end; font-size:11.5px; font-family:'Instrument Sans',sans-serif; color:#111;">
+              Ja, gerne! 😊
+              <div style="display:flex; justify-content:flex-end; align-items:center; gap:3px; margin-top:3px;">
+                <span style="font-size:9px; color:#999;">9:18</span>
+                <svg width="13" height="8" viewBox="0 0 13 8" fill="none"><path d="M1 4L3.5 6.5L8.5 1.5" stroke="#4FC3F7" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/><path d="M4.5 4L7 6.5L12 1.5" stroke="#4FC3F7" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Desktop annotation: right of phone -->
+      <div class="hidden md:flex flex-col items-start gap-3" style="margin-left:20px; padding-top:60px;">
+        <!-- Arrow pointing left toward phone -->
+        <svg width="48" height="32" viewBox="0 0 48 32" fill="none" style="transform:scaleX(-1);">
+          <path d="M4 24 Q28 24 40 10" stroke="#E8A0A8" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+          <path d="M36 6 L40 10 L44 6" stroke="#E8A0A8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        </svg>
+        <!-- Pill label -->
+        <div style="background:#FBEEF0; color:#C4847A; border-radius:999px; padding:7px 16px; font-size:13px; font-weight:600; font-family:'Instrument Sans',sans-serif; white-space:nowrap; letter-spacing:0.01em;">
+          Sie kommt zurück —<br>ganz von selbst.
+        </div>
+      </div>
+
     </div>
   </section>
 
